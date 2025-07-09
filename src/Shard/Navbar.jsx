@@ -1,9 +1,10 @@
-import {  NavLink } from "react-router";
+import { NavLink } from "react-router";
 import NavbarIcon from "./Navbaricon";
 import NavbarProfile from "./NavbarProfile/NavbarProfile";
+import { IoMdNotificationsOutline } from "react-icons/io";
+
 
 const Navbar = () => {
-
   const links = (
     <>
       <li className="px-1">
@@ -42,17 +43,14 @@ const Navbar = () => {
           Upcoming Meals
         </NavLink>
       </li>
-      <li className="px-1">
-        <NavLink
-          to="/meals"
-          className={({ isActive }) =>
-            isActive
-              ? "btn btn-sm btn-info text-white"
-              : "text-info hover:underline"
-          }
-        >
-          Meals2
-        </NavLink>
+      <li className="px-1 relative">
+        <button className="btn btn-sm btn-ghost text-info relative">
+          <IoMdNotificationsOutline className="text-2xl" />
+          {/* Notification badge */}
+          <span className="absolute -top-1 -right-1 bg-info text-white text-xs px-1.5 py-0.5 rounded-full">
+            3
+          </span>
+        </button>
       </li>
     </>
   );
@@ -95,7 +93,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       {/* photoURL */}
-    
+
       <div className="navbar-end">
         <NavbarProfile />
       </div>
