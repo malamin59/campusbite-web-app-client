@@ -22,7 +22,7 @@ const BannerSlider = () => {
     <div className="w-full mt-2 px-2 pb-7">
       <Slider {...settings}>
         {/* Slide 1 */}
-        <div className="relative h-[65vh] overflow-hidden rounded-lg">
+        <div className="relative  h-[300px] lg:h-[400px] overflow-hidden rounded-lg">
           <img
             src={banner1}
             alt="Banner 1"
@@ -33,9 +33,9 @@ const BannerSlider = () => {
               <Typewriter
                 options={{
                   strings: [
-                    "Find Your Ideal Roommate",
-                    "Welcome to our Roommate Finder Platform.",
-                    "The most popular Roommate Finder Website in the world.",
+                    "Manage Your Hostel Meals Efficiently",
+                    "Welcome to the University Hostel Management System",
+                    "Streamline Meal and Review Management Seamlessly",
                   ],
                   autoStart: true,
                   loop: true,
@@ -51,7 +51,7 @@ const BannerSlider = () => {
         </div>
 
         {/* Slide 2 */}
-        <div className="relative h-[65vh] overflow-hidden rounded-lg">
+        <div className="relative lg:h-[400px] h-[300px] overflow-hidden rounded-lg">
           <img
             src={banner2}
             alt="Banner 2"

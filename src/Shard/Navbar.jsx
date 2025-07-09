@@ -1,18 +1,58 @@
-import { Link } from "react-router";
+import {  NavLink } from "react-router";
 import NavbarIcon from "./Navbaricon";
-import useAuth from "../Hooks/useAuth";
+import NavbarProfile from "./NavbarProfile/NavbarProfile";
 
 const Navbar = () => {
-  const { user } = useAuth();
-  console.log(user);
+
   const links = (
     <>
-      <li>
-        <a>Item 1</a>
+      <li className="px-1">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "btn btn-sm btn-info text-white"
+              : "text-info hover:underline"
+          }
+        >
+          Home
+        </NavLink>
       </li>
-
-      <li>
-        <a>Item 3</a>
+      <li className="px-1">
+        <NavLink
+          to="/meals"
+          className={({ isActive }) =>
+            isActive
+              ? "btn btn-sm btn-info text-white"
+              : "text-info hover:underline"
+          }
+        >
+          Meals
+        </NavLink>
+      </li>
+      <li className="px-1">
+        <NavLink
+          to="/upcomingMeals"
+          className={({ isActive }) =>
+            isActive
+              ? "btn btn-sm btn-info text-white"
+              : "text-info hover:underline"
+          }
+        >
+          Upcoming Meals
+        </NavLink>
+      </li>
+      <li className="px-1">
+        <NavLink
+          to="/meals"
+          className={({ isActive }) =>
+            isActive
+              ? "btn btn-sm btn-info text-white"
+              : "text-info hover:underline"
+          }
+        >
+          Meals2
+        </NavLink>
       </li>
     </>
   );
@@ -21,7 +61,11 @@ const Navbar = () => {
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost p-0 lg:hidden">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost p-0 lg:hidden"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -50,10 +94,10 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
-      <div className="navbar-end btn-info">
-        <Link to="/login" className="btn">
-          login
-        </Link>
+      {/* photoURL */}
+    
+      <div className="navbar-end">
+        <NavbarProfile />
       </div>
     </div>
   );
