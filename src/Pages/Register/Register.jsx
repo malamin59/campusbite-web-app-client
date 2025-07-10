@@ -34,8 +34,16 @@ const Register = () => {
       const result = await createUser(data.email, data.password);
       /* update profile */
       await updateUserProfile(data.name, imageURL);
-      Swal.fire("Registered!", "Account created successfully");
       navigate(from);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Registered!",
+        text: "Account created successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
     } catch (error) {
       Swal.fire("Error!", error.message, "error");
     }

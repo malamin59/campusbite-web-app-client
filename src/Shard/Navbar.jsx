@@ -3,7 +3,6 @@ import NavbarIcon from "./Navbaricon";
 import NavbarProfile from "./NavbarProfile/NavbarProfile";
 import { IoMdNotificationsOutline } from "react-icons/io";
 
-
 const Navbar = () => {
   const links = (
     <>

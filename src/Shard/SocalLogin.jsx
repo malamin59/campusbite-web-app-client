@@ -15,7 +15,7 @@ const SocalLogin = () => {
         .then((res) => {
             console.log(res)
                 navigate(from)
-            toast.success('Registration Successfully')
+            toast.success("Login Successful", "Welcome back!")
         })
         .catch(error => {
             console.log(error)

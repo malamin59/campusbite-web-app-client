@@ -30,7 +30,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       await signIn(data.email, data.password);
-      Swal.fire("Login Successful", "Welcome back!", "success");
+      Swal.fire("Login Successful", "Welcome back!");
       navigate(from);
       watch();
     } catch (error) {

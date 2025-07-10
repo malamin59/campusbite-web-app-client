@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { useState, useRef, useEffect } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const NavbarProfile = () => {
   const { user, logOut } = useAuth();
@@ -18,13 +19,36 @@ const NavbarProfile = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleLogout = async () => {
-    try {
-      await logOut();
-    } catch (error) {
-      console.error("Logout failed", error);
+const handleLogout = async () => {
+  try {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You want to logout from your account.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, logout!",
+    });
+
+    if (result.isConfirmed) {
+      await logOut(); 
+
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Logged Out!",
+        text: "You have been successfully logged out.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
-  };
+  } catch (error) {
+    console.error("Logout failed", error);
+    Swal.fire("Error!", "Something went wrong during logout.", "error");
+  }
+};
+
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -44,8 +68,13 @@ const NavbarProfile = () => {
 
           {isDropdownOpen && (
             <div className="absolute top-14 right-0 bg-base-100 shadow-md rounded-md p-3 z-50 w-52">
-              <p className="text-info font-semibold px-2 mb-2">{user.displayName}</p>
-              <Link to="/dashboard" className="block px-2 py-1 hover:bg-base-200 rounded">
+              <p className="text-info font-semibold px-2 mb-2">
+                {user.displayName}
+              </p>
+              <Link
+                to="/dashboard"
+                className="block px-2 py-1 hover:bg-base-200 rounded"
+              >
                 Dashboard
               </Link>
               <button
