@@ -1,8 +1,10 @@
 import useAuth from "../../Hooks/useAuth";
 import LoadingSpinner from "../../Shard/LoadingSpinner/LoadingSpinner";
+import Badges from "./Badge/Badges";
 import Banner from "./Banner/Banner";
 
 const Home = () => {
+
   const { loading } = useAuth();
   if (loading) {
     return <LoadingSpinner />;
@@ -10,6 +12,7 @@ const Home = () => {
   return (
     <div className="overflow-x-hidden mx-1">
       <Banner />
+      <Badges/>
       {/* <BannerSide/> */}
     </div>
   );

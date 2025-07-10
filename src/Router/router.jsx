@@ -12,39 +12,37 @@ import UserProfile from "../Pages/DashboardPages/UserProfile/UserProfile";
 import ManageUsers from "../Pages/DashboardPages/ManageUsers/ManageUsers";
 
 const router = createBrowserRouter([
-{
-    path: '/',
-    element: <MainLaOut/>,
-    errorElement: <Error/>,
-    children:[
-        {
-            path:'/',
-            element: <Home/>
-        },
-        {
-            path:'/meals',
-            element: <Meals/>
-        },
-        {
-            path:'/upcomingMeals',
-            element: <UpcomingMeals/>
-        }
-    ]
-    
-    
-},
-{
-path:'/login',
-element:<Login/>
-},
-{
-path:'/register',
-element:<Register/>
-}
-,
-{
+  {
+    path: "/",
+    element: <MainLaOut />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "/",
+        loader: () => fetch(`${import.meta.env.VITE_API_URL}/badges`),
+        element: <Home />,
+      },
+      {
+        path: "/meals",
+          element: <Meals />,
+      },
+      {
+        path: "/upcomingMeals",
+        element: <UpcomingMeals />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
     path: "/dashboard",
-    element: <DashboardLayout />  ,
+    element: <DashboardLayout />,
     children: [
       { index: true, element: <AdminHome /> },
       { path: "profile", element: <UserProfile /> },
@@ -52,7 +50,5 @@ element:<Register/>
       { path: "users", element: <ManageUsers /> },
     ],
   },
-
-
 ]);
 export default router;

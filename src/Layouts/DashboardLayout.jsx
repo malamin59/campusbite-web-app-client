@@ -7,9 +7,9 @@ import LoadingSpinner from "../Shard/LoadingSpinner/LoadingSpinner";
 
 const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [role , isRoleLoading] = useRole();
-  console.log( "your role is",  role)
-  if(isRoleLoading) return <LoadingSpinner/>
+  const [role, isRoleLoading] = useRole();
+  console.log("your role is", role);
+  if (isRoleLoading) return <LoadingSpinner />;
 
   const links = (
     <>
@@ -22,6 +22,7 @@ const DashboardLayout = () => {
       >
         <FaHome /> Home
       </NavLink>
+      
       <NavLink
         to="/dashboard/profile"
         className={({ isActive }) =>
@@ -31,24 +32,33 @@ const DashboardLayout = () => {
       >
         <FaUser /> My Profile
       </NavLink>
-      <NavLink
-        to="/dashboard/meals"
-        className={({ isActive }) =>
-          isActive ? "btn btn-sm btn-info text-white" : "btn btn-sm btn-outline"
-        }
-        onClick={() => setSidebarOpen(false)}
-      >
-        <FaUtensils /> Added Meals
-      </NavLink>
-      <NavLink
-        to="/dashboard/users"
-        className={({ isActive }) =>
-          isActive ? "btn btn-sm btn-info text-white" : "btn btn-sm btn-outline"
-        }
-        onClick={() => setSidebarOpen(false)}
-      >
-        <FaUsers /> Manage Users
-      </NavLink>
+
+      {role === "admin" && (
+        <>
+          <NavLink
+            to="/dashboard/meals"
+            className={({ isActive }) =>
+              isActive
+                ? "btn btn-sm btn-info text-white"
+                : "btn btn-sm btn-outline"
+            }
+            onClick={() => setSidebarOpen(false)}
+          >
+            <FaUtensils /> Added Meals
+          </NavLink>
+          <NavLink
+            to="/dashboard/users"
+            className={({ isActive }) =>
+              isActive
+                ? "btn btn-sm btn-info text-white"
+                : "btn btn-sm btn-outline"
+            }
+            onClick={() => setSidebarOpen(false)}
+          >
+            <FaUsers /> Manage Users
+          </NavLink>
+        </>
+      )}
     </>
   );
 
