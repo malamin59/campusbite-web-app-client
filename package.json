@@ -12,6 +12,7 @@
   "dependencies": {
     "@headlessui/react": "^2.2.4",
     "@tailwindcss/vite": "^4.1.11",
+    "@tanstack/react-query": "^5.82.0",
     "axios": "^1.10.0",
     "firebase": "^11.10.0",
     "framer-motion": "^12.23.1",

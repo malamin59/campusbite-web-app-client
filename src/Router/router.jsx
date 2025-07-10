@@ -9,6 +9,7 @@ import UpcomingMeals from "../Pages/UpcomingMeals/UpcomingMeals";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import AdminHome from "../Pages/DashboardPages/Admin/AdminHome";
 import UserProfile from "../Pages/DashboardPages/UserProfile/UserProfile";
+import ManageUsers from "../Pages/DashboardPages/ManageUsers/ManageUsers";
 
 const router = createBrowserRouter([
 {
@@ -43,12 +44,12 @@ element:<Register/>
 ,
 {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: <DashboardLayout />  ,
     children: [
       { index: true, element: <AdminHome /> },
       { path: "profile", element: <UserProfile /> },
-    //   { path: "meals", element: <ManageMeals /> },
-    //   { path: "users", element: <ManageUsers /> },
+      { path: "meals", element: <Meals /> },
+      { path: "users", element: <ManageUsers /> },
     ],
   },
 

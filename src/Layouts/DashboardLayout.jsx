@@ -2,9 +2,14 @@ import { useState } from "react";
 import { Outlet, NavLink } from "react-router";
 import { FaHome, FaUser, FaUtensils, FaUsers } from "react-icons/fa";
 import NavbarIcon from "../Shard/Navbaricon";
+import useRole from "../Hooks/UseRole";
+import LoadingSpinner from "../Shard/LoadingSpinner/LoadingSpinner";
 
 const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [role , isRoleLoading] = useRole();
+  console.log( "your role is",  role)
+  if(isRoleLoading) return <LoadingSpinner/>
 
   const links = (
     <>
@@ -33,7 +38,7 @@ const DashboardLayout = () => {
         }
         onClick={() => setSidebarOpen(false)}
       >
-        <FaUtensils /> Meals
+        <FaUtensils /> Added Meals
       </NavLink>
       <NavLink
         to="/dashboard/users"
