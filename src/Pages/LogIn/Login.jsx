@@ -1,8 +1,5 @@
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
-// import { signInWithEmailAndPassword } from "firebase/auth";
-// import { auth } from "../../firebase.config";
-// import Swal from "sweetalert2";
 import animation from "../../assets/Login-Animation - 1751988912123.json";
 import Lottie from "lottie-react";
 import SocalLogin from "../../Shard/SocalLogin";
@@ -10,9 +7,10 @@ import NavbarIcon from "../../Shard/Navbaricon";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import LoadingSpinner from "../../Shard/LoadingSpinner/LoadingSpinner";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import PasswordInput from "../../Shard/PasswordInput/PasswordInput";
 import Button from "../../Shard/Button/Button";
+import { saveUsersDb } from "../../Api/Utils/util";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { signIn, loading } = useAuth();
@@ -29,8 +27,16 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      await signIn(data.email, data.password);
-      Swal.fire("Login Successful", "Welcome back!");
+      const result = await signIn(data.email, data.password);
+      const userData = {
+        name: result?.user.displayName,
+        email: result?.user?.email,
+        image: result?.user?.photoURL,
+      };
+      await saveUsersDb(userData);
+
+      toast.success("Login Successful", "Welcome back!");
+
       navigate(from);
       watch();
     } catch (error) {
@@ -88,7 +94,7 @@ const Login = () => {
               {/* google login */}
               <SocalLogin />
               {/* Submit Button */}
-             <Button type="submit"> Login</Button>
+              <Button type="submit"> Login</Button>
               <p className="text-center">
                 New this site Please{" "}
                 <small className="text-info underline">

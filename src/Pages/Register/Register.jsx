@@ -1,8 +1,5 @@
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
-// import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-// import { auth } from "../../firebase.config";
-// import Swal from "sweetalert2";
 import Lottie from "lottie-react";
 import animation from "../../assets/register-Animation - 1751991442325 (1).json"; // your animation JSON file
 import NavbarIcon from "../../Shard/Navbaricon";
@@ -10,7 +7,7 @@ import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import SocalLogin from "../../Shard/SocalLogin";
 import LoadingSpinner from "../../Shard/LoadingSpinner/LoadingSpinner";
-import { imageUpload } from "../../Api/Utils/util";
+import { imageUpload, saveUsersDb } from "../../Api/Utils/util";
 import PasswordInput from "../../Shard/PasswordInput/PasswordInput";
 import Button from "../../Shard/Button/Button";
 
@@ -34,6 +31,14 @@ const Register = () => {
       const result = await createUser(data.email, data.password);
       /* update profile */
       await updateUserProfile(data.name, imageURL);
+
+         const userData = {
+             name: result?.user.displayName,
+             email: result?.user?.email,
+             image: result?.user?.photoURL,
+           };
+           await saveUsersDb(userData)
+
       navigate(from);
       Swal.fire({
         position: "top-end",
