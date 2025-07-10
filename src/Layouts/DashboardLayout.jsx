@@ -4,6 +4,14 @@ import { FaHome, FaUser, FaUtensils, FaUsers } from "react-icons/fa";
 import NavbarIcon from "../Shard/Navbaricon";
 import useRole from "../Hooks/UseRole";
 import LoadingSpinner from "../Shard/LoadingSpinner/LoadingSpinner";
+import {
+  FaConciergeBell,
+  FaCalendarAlt,
+  FaRegListAlt,
+  FaClipboardList,
+  FaCommentAlt,
+  FaMoneyCheckAlt,
+} from "react-icons/fa";
 
 const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -13,30 +21,73 @@ const DashboardLayout = () => {
 
   const links = (
     <>
-      <NavLink
-        to="/dashboard"
-        className={({ isActive }) =>
-          isActive ? "btn btn-sm btn-info text-white" : "btn btn-sm btn-outline"
-        }
-        onClick={() => setSidebarOpen(false)}
-      >
-        <FaHome /> Home
-      </NavLink>
-      
-      <NavLink
-        to="/dashboard/profile"
-        className={({ isActive }) =>
-          isActive ? "btn btn-sm btn-info text-white" : "btn btn-sm btn-outline"
-        }
-        onClick={() => setSidebarOpen(false)}
-      >
-        <FaUser /> My Profile
-      </NavLink>
+      {role === "user" && (
+        <>
+          <NavLink
+            to="/dashboard/userProfile"
+            className={({ isActive }) =>
+              isActive
+                ? "btn btn-sm btn-info text-white"
+                : "btn btn-sm btn-outline"
+            }
+            onClick={() => setSidebarOpen(false)}
+          >
+            <FaUser /> My Profile
+          </NavLink>
+
+          <NavLink
+            to="/dashboard/requested-meals"
+            className={({ isActive }) =>
+              isActive
+                ? "btn btn-sm btn-info text-white"
+                : "btn btn-sm btn-outline"
+            }
+            onClick={() => setSidebarOpen(false)}
+          >
+            <FaUtensils /> Requested Meals
+          </NavLink>
+
+          <NavLink
+            to="/dashboard/my-reviews"
+            className={({ isActive }) =>
+              isActive
+                ? "btn btn-sm btn-info text-white"
+                : "btn btn-sm btn-outline"
+            }
+            onClick={() => setSidebarOpen(false)}
+          >
+            <FaCommentAlt /> My Reviews
+          </NavLink>
+
+          <NavLink
+            to="/dashboard/payment-history"
+            className={({ isActive }) =>
+              isActive
+                ? "btn btn-sm btn-info text-white"
+                : "btn btn-sm btn-outline"
+            }
+            onClick={() => setSidebarOpen(false)}
+          >
+            <FaMoneyCheckAlt /> Payment History
+          </NavLink>
+        </>
+      )}
 
       {role === "admin" && (
         <>
           <NavLink
-            to="/dashboard/meals"
+            to="/dashboard"
+            className={({ isActive }) =>
+              isActive
+                ? "btn btn-sm btn-info text-white"
+                : "btn btn-sm btn-outline"
+            }
+            onClick={() => setSidebarOpen(false)}
+          >
+            <FaHome /> Home
+          </NavLink>
+          <NavLink
+            to="/dashboard/addedMeals"
             className={({ isActive }) =>
               isActive
                 ? "btn btn-sm btn-info text-white"
@@ -56,6 +107,54 @@ const DashboardLayout = () => {
             onClick={() => setSidebarOpen(false)}
           >
             <FaUsers /> Manage Users
+          </NavLink>
+
+          <NavLink
+            to="/dashboard/upcomingMeals"
+            className={({ isActive }) =>
+              isActive
+                ? "btn btn-sm btn-info text-white"
+                : "btn btn-sm btn-outline"
+            }
+            onClick={() => setSidebarOpen(false)}
+          >
+            <FaCalendarAlt /> Upcoming Meals
+          </NavLink>
+
+          <NavLink
+            to="/dashboard/serveMeals"
+            className={({ isActive }) =>
+              isActive
+                ? "btn btn-sm btn-info text-white"
+                : "btn btn-sm btn-outline"
+            }
+            onClick={() => setSidebarOpen(false)}
+          >
+            <FaConciergeBell /> Serve Meals
+          </NavLink>
+
+          <NavLink
+            to="/dashboard/allReviews"
+            className={({ isActive }) =>
+              isActive
+                ? "btn btn-sm btn-info text-white"
+                : "btn btn-sm btn-outline"
+            }
+            onClick={() => setSidebarOpen(false)}
+          >
+            <FaRegListAlt /> All Reviews
+          </NavLink>
+
+          <NavLink
+            to="/dashboard/allMeals"
+            className={({ isActive }) =>
+              isActive
+                ? "btn btn-sm btn-info text-white"
+                : "btn btn-sm btn-outline"
+            }
+            onClick={() => setSidebarOpen(false)}
+          >
+            <FaClipboardList /> All Meals
           </NavLink>
         </>
       )}

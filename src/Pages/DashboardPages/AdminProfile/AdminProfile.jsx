@@ -1,7 +1,6 @@
 import useAuth from "../../../Hooks/useAuth";
 
-
-const UserProfile = () => {
+const AdminProfile = () => {
   const { user } = useAuth();
 
   if (!user) {
@@ -11,7 +10,7 @@ const UserProfile = () => {
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-base-200 rounded shadow text-center">
       <img
-        src={user.photoURL || "https://via.placeholder.com/150"}
+        src={user?.photoURL || "photo"}
         alt={user.displayName || "User Profile"}
         className="mx-auto rounded-full w-32 h-32 object-cover mb-4 border-4 border-info"
       />
@@ -23,4 +22,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default AdminProfile;

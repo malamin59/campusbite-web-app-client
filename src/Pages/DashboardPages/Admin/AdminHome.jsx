@@ -1,8 +1,14 @@
+import useRole from "../../../Hooks/UseRole";
+import AdminProfile from "../AdminProfile/AdminProfile";
+import UserDashboardHome from "../UserDashboard/UserDashboardHome";
+
+
 const AdminHome = () => {
+  const [role] = useRole();
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Welcome to Admin Dashboard</h2>
- 
+      {role === "admin" && <AdminProfile />}
+      {role === "user" && <UserDashboardHome />}
     </div>
   );
 };

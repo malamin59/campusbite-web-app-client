@@ -5,11 +5,22 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/LogIn/Login";
 import Register from "../Pages/Register/Register";
 import Meals from "../Pages/Meals/Meals";
-import UpcomingMeals from "../Pages/UpcomingMeals/UpcomingMeals";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import AdminHome from "../Pages/DashboardPages/Admin/AdminHome";
-import UserProfile from "../Pages/DashboardPages/UserProfile/UserProfile";
+// import UserProfile from "../Pages/DashboardPages/UserProfile/UserProfile";
 import ManageUsers from "../Pages/DashboardPages/ManageUsers/ManageUsers";
+import ServeMeals from "../Pages/DashboardPages/ServeMeals/ServeMeals";
+import AllReviews from "../Pages/DashboardPages/AllReviews/AllReviews";
+import AllMeals from "../Pages/DashboardPages/AllMeals/AllMeals";
+import UpcomingMeals from "../Pages/DashboardPages/UpcomingMeals/UpcomingMeals";
+import RequestedMeal from "../Pages/DashboardPages/UserDashboard/RequestedMeal";
+import MyReviews from "../Pages/DashboardPages/UserDashboard/MyReviews";
+import PaymentHistory from "../Pages/DashboardPages/UserDashboard/PaymentHistory";
+import PrivateRoute from "./PrivateRout";
+import AdminRouts from "./AdminRout";
+import AdminProfile from "../Pages/DashboardPages/AdminProfile/AdminProfile";
+import UserProfile from "../Pages/DashboardPages/UserDashboard/UserProfile";
+import AddMeal from "../Pages/DashboardPages/AddMeal/AddMeal";
 
 const router = createBrowserRouter([
   {
@@ -24,11 +35,20 @@ const router = createBrowserRouter([
       },
       {
         path: "/meals",
-          element: <Meals />,
+        element: (
+          <PrivateRoute>
+            <Meals />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/upcomingMeals",
-        element: <UpcomingMeals />,
+        element: (
+          <PrivateRoute>
+            {" "}
+            <UpcomingMeals />
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -42,12 +62,65 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       { index: true, element: <AdminHome /> },
-      { path: "profile", element: <UserProfile /> },
-      { path: "meals", element: <Meals /> },
+      {
+        path: "adminProfile",
+        element: (
+          <AdminRouts>
+            {" "}
+            <AdminProfile />{" "}
+          </AdminRouts>
+        ),
+      },
+      {
+        path: "addedMeals",
+        element: (
+          <AdminRouts>
+            {" "}
+            <AddMeal />{" "}
+          </AdminRouts>
+        ),
+      },
       { path: "users", element: <ManageUsers /> },
+
+      {
+        path: "serveMeals",
+        element: (
+          <AdminRouts>
+            <ServeMeals />
+          </AdminRouts>
+        ),
+      },
+      {
+        path: "allReviews",
+        element: (
+          <AdminRouts>
+            <AllReviews />{" "}
+          </AdminRouts>
+        ),
+      },
+      { path: "allMeals", element: <AllMeals /> },
+      {
+        path: "upcomingMeals",
+        element: (
+          <AdminRouts>
+            {" "}
+            <UpcomingMeals />
+          </AdminRouts>
+        ),
+      },
+
+      { path: "userProfile", element: <UserProfile /> },
+      { path: "requested-meals", element: <RequestedMeal /> },
+      { path: "my-reviews", element: <MyReviews /> },
+      { path: "payment-history", element: <PaymentHistory /> },
+      { path: "upcomingMeals", element: <UpcomingMeals /> },
     ],
   },
 ]);
