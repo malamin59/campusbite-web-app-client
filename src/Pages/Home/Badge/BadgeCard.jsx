@@ -1,5 +1,6 @@
 import { FaCheckCircle, FaMedal } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { Link} from "react-router";
 
 // Unique badge colors only (not full card bg)
 const badgeColors = {
@@ -8,8 +9,9 @@ const badgeColors = {
   Platinum: "text-purple-500",
 };
 
+
 const BadgeCard = ({ badge }) => {
-  const { name, price, benefits } = badge;
+  const { name, price, benefits, _id } = badge;
 
   return (
     <motion.div
@@ -19,13 +21,15 @@ const BadgeCard = ({ badge }) => {
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <FaMedal className={`text-2xl ${badgeColors[name] || "text-gray-400"}`} />
+          <FaMedal
+            className={`text-2xl ${badgeColors[name] || "text-gray-400"}`}
+          />
           <h3 className="text-xl font-bold">{name} Plan</h3>
         </div>
         <p className="text-lg font-semibold">৳{price}</p>
       </div>
 
-      {/* Benefits */}
+      {/* Benefits */}  
       <ul className="space-y-2 text-sm mt-2">
         {benefits?.map((benefit, idx) => (
           <li
@@ -39,9 +43,11 @@ const BadgeCard = ({ badge }) => {
       </ul>
 
       {/* Upgrade Button */}
-      <button className="mt-6 btn btn-sm btn-info w-full">
-        Upgrade to {name}
-      </button>
+      <Link to={`/checkoutPage/${_id}`}>
+        <button className="mt-6 btn btn-sm btn-info w-full">
+          Upgrade to {name}
+        </button>
+      </Link>
     </motion.div>
   );
 };

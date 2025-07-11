@@ -21,6 +21,7 @@ import AdminRouts from "./AdminRout";
 import AdminProfile from "../Pages/DashboardPages/AdminProfile/AdminProfile";
 import UserProfile from "../Pages/DashboardPages/UserDashboard/UserProfile";
 import AddMeal from "../Pages/DashboardPages/AddMeal/AddMeal";
+import CheckoutPage from "../Pages/CheckoutPage/CheckoutPage";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,17 @@ const router = createBrowserRouter([
           <PrivateRoute>
             {" "}
             <UpcomingMeals />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/checkoutPage/:id",
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/badges/${params.id}`),
+        element: (  
+          <PrivateRoute>
+            {" "}
+            <CheckoutPage />
           </PrivateRoute>
         ),
       },

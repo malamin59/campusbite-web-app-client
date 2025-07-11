@@ -1,8 +1,23 @@
+import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../Hooks/useAuth";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const UserProfile = () => {
   const { user } = useAuth();
-  console.log(user);
+
+  const axiosSecure = useAxiosSecure();
+
+  const { data } = useQuery({
+    queryKey: ["user"],
+    enabled: !!user?.email,
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/user/${user.email}`);
+      return res.data;
+    },
+  });
+
+  console.log(data);
+
   if (!user) {
     return <p className="text-center mt-10">No user is logged in.</p>;
   }
@@ -18,8 +33,9 @@ const UserProfile = () => {
           {user.displayName || "No Name"}
         </h2>
         <p className="text-lg text-gray-700">{user.email || "No Email"}</p>
+        <p className="text-lg text-gray-700"> Badge: {data?.badge || "No badge"}</p>
       </div>
-     </div>
+    </div>
   );
 };
 
