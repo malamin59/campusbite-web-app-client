@@ -22,6 +22,7 @@ import AdminProfile from "../Pages/DashboardPages/AdminProfile/AdminProfile";
 import UserProfile from "../Pages/DashboardPages/UserDashboard/UserProfile";
 import AddMeal from "../Pages/DashboardPages/AddMeal/AddMeal";
 import CheckoutPage from "../Pages/CheckoutPage/CheckoutPage";
+import UserRout from "./UserRout";
 
 const router = createBrowserRouter([
   {
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
         path: "/checkoutPage/:id",
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/badges/${params.id}`),
-        element: (  
+        element: (
           <PrivateRoute>
             {" "}
             <CheckoutPage />
@@ -99,7 +100,14 @@ const router = createBrowserRouter([
           </AdminRouts>
         ),
       },
-      { path: "users", element: <AdminRouts><ManageUsers /> </AdminRouts> },
+      {
+        path: "users",
+        element: (
+          <AdminRouts>
+            <ManageUsers />{" "}
+          </AdminRouts>
+        ),
+      },
 
       {
         path: "serveMeals",
@@ -127,12 +135,52 @@ const router = createBrowserRouter([
           </AdminRouts>
         ),
       },
+      /* user routs */
 
-      { path: "userProfile", element: <UserProfile /> },
-      { path: "requested-meals", element: <RequestedMeal /> },
-      { path: "my-reviews", element: <MyReviews /> },
-      { path: "payment-history", element: <PaymentHistory /> },
-      { path: "upcomingMeals", element: <UpcomingMeals /> },
+      {
+        path: "userProfile",
+        element: (
+          <UserRout>
+            <UserProfile />
+          </UserRout>
+        ),
+      },
+      {
+        path: "requested-meals",
+        element: (
+          <UserRout>
+            {" "}
+            <RequestedMeal />{" "}
+          </UserRout>
+        ),
+      },
+      {
+        path: "my-reviews",
+        element: (
+          <UserRout>
+            {" "}
+            <MyReviews />
+          </UserRout>
+        ),
+      },
+      {
+        path: "payment-history",
+        element: (
+          <UserRout>
+            {" "}
+            <PaymentHistory />
+          </UserRout>
+        ),
+      },
+      {
+        path: "upcomingMeals",
+        element: (
+          <UserRout>
+            {" "}
+            <UpcomingMeals />
+          </UserRout>
+        ),
+      },
     ],
   },
 ]);
