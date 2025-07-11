@@ -99,7 +99,7 @@ const router = createBrowserRouter([
           </AdminRouts>
         ),
       },
-      { path: "users", element: <ManageUsers /> },
+      { path: "users", element: <AdminRouts><ManageUsers /> </AdminRouts> },
 
       {
         path: "serveMeals",
