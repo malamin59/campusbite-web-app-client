@@ -16,8 +16,6 @@ const UserProfile = () => {
     },
   });
 
-  console.log(data);
-
   if (!user) {
     return <p className="text-center mt-10">No user is logged in.</p>;
   }
@@ -33,7 +31,10 @@ const UserProfile = () => {
           {user.displayName || "No Name"}
         </h2>
         <p className="text-lg text-gray-700">{user.email || "No Email"}</p>
-        <p className="text-lg text-gray-700"> Badge: {data?.badge || "No badge"}</p>
+        <p className="text-lg text-gray-700">
+          {" "}
+          Badge: {data?.badge || "No badge"}
+        </p>
       </div>
     </div>
   );

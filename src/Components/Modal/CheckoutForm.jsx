@@ -2,12 +2,14 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2"; // or use react-toastify
+import useAuth from "../../Hooks/useAuth";
 
 const CheckoutForm = ({ badge }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
   const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,14 +51,10 @@ const CheckoutForm = ({ badge }) => {
         // Save payment info to DB
         await axiosSecure.post("/payments", {
           badgeId: badge._id,
+          email: user?.email,
           badgeName: badge.name,
           price: badge.price,
           date: new Date(),
-        });
-
-        // Update user's badge
-        await axiosSecure.patch(`/user/badge`, {
-          badge: badge.name,
         });
 
         Swal.fire("Success!", "Payment successful & badge updated.", "success");

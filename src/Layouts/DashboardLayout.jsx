@@ -202,7 +202,7 @@ const DashboardLayout = () => {
       <aside
         className={`
           bg-base-200 p-4 space-y-4
-          fixed top-12 left-0 h-full z-40
+          fixed top-12 left-0  lg:h-auto h-full z-40
           w-64
           transform
           transition-transform duration-300 ease-in-out
