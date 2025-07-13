@@ -23,6 +23,7 @@ import UserProfile from "../Pages/DashboardPages/UserDashboard/UserProfile";
 import AddMeal from "../Pages/DashboardPages/AddMeal/AddMeal";
 import CheckoutPage from "../Pages/CheckoutPage/CheckoutPage";
 import UserRout from "./UserRout";
+import MealDetails from "../Pages/MealDetails/MealDetails";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "meal/:id",
+        element: <MealDetails />,
+      },
     ],
   },
   {
@@ -73,6 +78,7 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />,
   },
+  /* dashboard path */
   {
     path: "/dashboard",
     element: (

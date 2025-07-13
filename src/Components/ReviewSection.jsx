@@ -1,0 +1,66 @@
+import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
+import useAuth from "../Hooks/useAuth";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { useState } from "react";
+
+const ReviewSection = ({ mealId }) => {
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  const [reviewText, setReviewText] = useState("");
+
+  const { data: reviews = [], refetch } = useQuery({
+    queryKey: ["reviews", mealId],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/reviews/${mealId}`);
+      return res.data;
+    },
+  });
+
+  const handleReview = async () => {
+    if (!reviewText) return;
+
+    await axiosSecure.post("/reviews", {
+      mealId,
+      email: user.email,
+      text: reviewText,
+      date: new Date(),
+    });
+
+    setReviewText("");
+    Swal.fire("Review Added!", "", "success");
+    refetch();
+  };
+
+  return (
+    <div>
+      {user && (
+        <div className="mb-4">
+          <textarea
+            placeholder="Write a review"
+            value={reviewText}
+            onChange={(e) => setReviewText(e.target.value)}
+            className="textarea textarea-bordered w-full mb-2"
+          ></textarea>
+          <button className="btn btn-sm btn-info" onClick={handleReview}>
+            Submit Review
+          </button>
+        </div>
+      )}
+
+      <div className="space-y-3">
+        {reviews.map((rev, i) => (
+          <div key={i} className="p-3 bg-white rounded shadow">
+            <p className="text-sm font-medium">{rev.email}</p>
+            <p>{rev.text}</p>
+            <p className="text-xs text-gray-500">
+              {new Date(rev.date).toLocaleString()}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default ReviewSection;
