@@ -46,7 +46,7 @@ const AddMeal = () => {
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/meals`,
         mealData
-      );
+      );  
 
       if (res.data.insertedId) {
         Swal.fire("Success", "Meal added successfully!", "success");
@@ -91,13 +91,12 @@ const AddMeal = () => {
           <select
             id="category"
             {...register("category", { required: "Category is required" })}
-            className="select select-bordered w-full"
+            className="select bg- select-bordered w-full"
           >
             <option value="">Select category</option>
             <option value="Breakfast">Breakfast</option>
             <option value="Lunch">Lunch</option>
             <option value="Dinner">Dinner</option>
-            <option value="Snack">Snack</option>
           </select>
           {errors.category && <p className="text-red-500 text-sm">{errors.category.message}</p>}
         </div>
@@ -185,7 +184,7 @@ const AddMeal = () => {
         <div className="md:col-span-2">
           <button
             type="submit"
-            className={`btn btn-primary w-full ${uploading ? "loading" : ""}`}
+            className={`btn btn-info w-full ${uploading ? "loading" : ""}`}
             disabled={uploading}
           >
             {uploading ? "Uploading..." : "Add Meal"}
