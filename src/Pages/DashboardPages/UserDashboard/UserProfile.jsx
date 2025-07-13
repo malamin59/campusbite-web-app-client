@@ -6,7 +6,6 @@ const UserProfile = () => {
   const { user } = useAuth();
 
   const axiosSecure = useAxiosSecure();
-
   const { data } = useQuery({
     queryKey: ["user"],
     enabled: !!user?.email,

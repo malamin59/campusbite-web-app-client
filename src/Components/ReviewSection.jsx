@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const ReviewSection = ({ mealId }) => {
   const axiosSecure = useAxiosSecure();
@@ -28,7 +29,7 @@ const ReviewSection = ({ mealId }) => {
     });
 
     setReviewText("");
-    Swal.fire("Review Added!", "", "success");
+    toast.success("Review Added Successfully!","success");
     refetch();
   };
 

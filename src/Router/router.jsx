@@ -129,7 +129,7 @@ const router = createBrowserRouter([
           <AdminRouts>
             <AllReviews />{" "}
           </AdminRouts>
-        ),
+        ),  
       },
       { path: "allMeals", element: <AllMeals /> },
       {

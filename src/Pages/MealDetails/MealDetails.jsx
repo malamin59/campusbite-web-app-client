@@ -5,7 +5,7 @@ import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import ReviewSection from "../../Components/ReviewSection";
 import toast from "react-hot-toast";
-import {   FaThumbsUp, FaUtensils, } from "react-icons/fa";
+import { FaThumbsUp, FaUtensils } from "react-icons/fa";
 
 const MealDetails = () => {
   const { id } = useParams();
@@ -16,6 +16,16 @@ const MealDetails = () => {
     queryKey: ["meal", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/meals/${id}`);
+      return res.data;
+    },
+  });
+  console.log(meal)
+  /* get the user data for check the user Badge */
+  const { data:userData } = useQuery({
+    queryKey: ["user"],
+    enabled: !!user?.email,
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/user/${user.email}`);
       return res.data;
     },
   });
@@ -30,12 +40,20 @@ const MealDetails = () => {
 
   const handleRequestMeal = async () => {
     if (!user) return Swal.fire("Login Required", "Please login", "warning");
+    if (userData?.badge === "Bronze") {
+      return toast.error(
+        "Only Silver, Gold, or Platinum users can request meals."
+      );
+    }
 
     await axiosSecure.post("/meal-requests", {
       mealId: id,
       userEmail: user.email,
-      userName: user?.name,
+      userName: user?.displayName,
       status: "pending",
+      reviews_count: meal.reviews_count,
+      title:meal.title,
+      likes:meal.likes
     });
 
     Swal.fire("Requested!", "Your meal request is pending", "success");
@@ -63,15 +81,19 @@ const MealDetails = () => {
         <strong>Likes:</strong> {meal.likes}
       </p>
       <div className="flex gap-4 mt-4">
-     <button className="btn btn-info flex items-center gap-2" onClick={handleLike}>
-  <FaThumbsUp /> Like 
-</button>
+        <button
+          className="btn btn-info flex items-center gap-2"
+          onClick={handleLike}
+        >
+          <FaThumbsUp /> Like
+        </button>
 
-
-
-<button className="btn btn-info flex items-center gap-2" onClick={handleRequestMeal}>
-  <FaUtensils /> Request Meal
-</button>
+        <button
+          className="btn btn-info flex items-center gap-2"
+          onClick={handleRequestMeal}
+        >
+          <FaUtensils /> Request Meal
+        </button>
       </div>
 
       {/* Reviews Section */}

@@ -25,6 +25,7 @@ import PaymentTable from "../../../Components/Table/PaymentTable";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import EmptyPage from "../../../Shard/Empty/EmptyPage";
 
 const PaymentHistory = () => {
   const { user } = useAuth();
@@ -40,6 +41,7 @@ const PaymentHistory = () => {
   });
 
   if (isLoading) return <p className="text-center mt-10">Loading...</p>;
+  if(payment.length === 0) return <EmptyPage/>
 
   return (
     <div className="max-w-4xl mx-auto p-4 mt-10">
