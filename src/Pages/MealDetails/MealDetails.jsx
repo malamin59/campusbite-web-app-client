@@ -75,6 +75,9 @@ const MealDetails = () => {
         <strong>Posted:</strong> {new Date(meal.post_time).toLocaleString()}
       </p>
       <p>
+        <strong>Price:</strong> {meal.price}
+      </p>
+      <p>
         <strong>Rating:</strong> {meal.rating}
       </p>
       <p>
