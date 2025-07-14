@@ -12,8 +12,45 @@ import {
   FaCommentAlt,
   FaMoneyCheckAlt,
 } from "react-icons/fa";
+import Swal from "sweetalert2";
+import useAuth from "../Hooks/useAuth";
+import { FiLogOut } from "react-icons/fi";
+
 
 const DashboardLayout = () => {
+  const { logOut } = useAuth();
+  
+  const handleLogout = async () => {
+    try {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "You want to logout from your account.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, logout!",
+      });
+  
+      if (result.isConfirmed) {
+        await logOut();
+  
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Logged Out!",
+          text: "You have been successfully logged out.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    } catch (error) {
+      console.error("Logout failed", error);
+      Swal.fire("Error!", "Something went wrong during logout.", "error");
+    }
+  };
+
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [role, isRoleLoading] = useRole();
   console.log("your role is", role);
@@ -156,6 +193,12 @@ const DashboardLayout = () => {
           >
             <FaClipboardList /> All Meals
           </NavLink>
+          <div className="mt-[100%]">
+            <button onClick={handleLogout} className="btn btn-info w-full flex items-center justify-center gap-2">
+  <FiLogOut />
+  Logout
+</button>
+          </div>
         </>
       )}
     </>
