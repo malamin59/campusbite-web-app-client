@@ -24,6 +24,7 @@ import AddMeal from "../Pages/DashboardPages/AddMeal/AddMeal";
 import CheckoutPage from "../Pages/CheckoutPage/CheckoutPage";
 import UserRout from "./UserRout";
 import MealDetails from "../Pages/MealDetails/MealDetails";
+import UpdateReview from "../Components/UpdateReview";
 
 const router = createBrowserRouter([
   {
@@ -129,7 +130,7 @@ const router = createBrowserRouter([
           <AdminRouts>
             <AllReviews />{" "}
           </AdminRouts>
-        ),  
+        ),
       },
       { path: "allMeals", element: <AllMeals /> },
       {
@@ -165,7 +166,9 @@ const router = createBrowserRouter([
         element: (
           <UserRout>
             {" "}
-            <MyReviews />
+            <UserRout>
+              <MyReviews />
+            </UserRout>
           </UserRout>
         ),
       },
@@ -185,6 +188,14 @@ const router = createBrowserRouter([
             {" "}
             <UpcomingMeals />
           </UserRout>
+        ),
+      },
+      {
+        path: "/dashboard/updateReview/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateReview />
+          </PrivateRoute>
         ),
       },
     ],

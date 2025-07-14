@@ -4,12 +4,13 @@ import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useParams } from "react-router";
 
-const ReviewSection = ({ mealId }) => {
+const ReviewSection = ({ mealId, mealRefetch}) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [reviewText, setReviewText] = useState("");
-
+  const { id } = useParams();
   const { data: reviews = [], refetch } = useQuery({
     queryKey: ["reviews", mealId],
     queryFn: async () => {
@@ -17,7 +18,15 @@ const ReviewSection = ({ mealId }) => {
       return res.data;
     },
   });
+    const { data: meal = {}, } = useQuery({
+    queryKey: ["meal", id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/meals/${id}`);
+      return res.data;
+    },
+  });
 
+  console.log(meal)
   const handleReview = async () => {
     if (!reviewText) return;
 
@@ -25,12 +34,16 @@ const ReviewSection = ({ mealId }) => {
       mealId,
       email: user.email,
       text: reviewText,
+      likes:meal.likes,
+      title:meal.title,
+      reviews_count:meal.reviews_count,
       date: new Date(),
     });
 
     setReviewText("");
     toast.success("Review Added Successfully!","success");
     refetch();
+    mealRefetch()
   };
 
   return (

@@ -218,7 +218,7 @@ const DashboardLayout = () => {
 
       {/* Main Content */}
       {/* Add margin top on mobile to not be hidden behind the fixed top bar */}
-      <main className="flex-1 p-6 bg-base-100 mt-12 lg:mt-0 lg:ml-64">
+      <main className="flex-1 p-6 bg-base-100 mt-12 lg:mt-0 lg:ml-20">
         <Outlet />
       </main>
 

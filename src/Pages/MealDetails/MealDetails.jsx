@@ -19,7 +19,7 @@ const MealDetails = () => {
       return res.data;
     },
   });
-  console.log(meal)
+
   /* get the user data for check the user Badge */
   const { data:userData } = useQuery({
     queryKey: ["user"],
@@ -101,7 +101,7 @@ const MealDetails = () => {
         <h3 className="text-xl font-semibold mb-2">
           Reviews ({meal.reviews_count})
         </h3>
-        <ReviewSection mealId={id} />
+        <ReviewSection mealId={id}  mealRefetch={refetch}  />
       </div>
     </div>
   );
