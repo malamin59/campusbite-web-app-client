@@ -25,6 +25,7 @@ import CheckoutPage from "../Pages/CheckoutPage/CheckoutPage";
 import UserRout from "./UserRout";
 import MealDetails from "../Pages/MealDetails/MealDetails";
 import UpdateReview from "../Components/UpdateReview";
+import UpdateMeal from "../Components/UpdateMeal";
 
 const router = createBrowserRouter([
   {
@@ -142,6 +143,16 @@ const router = createBrowserRouter([
           </AdminRouts>
         ),
       },
+
+      {
+        path: "/dashboard/updateMeal/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateMeal />
+          </PrivateRoute>
+        ),
+      },
+
       /* user routs */
 
       {

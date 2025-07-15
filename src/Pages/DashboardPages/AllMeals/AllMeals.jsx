@@ -3,15 +3,17 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useState } from "react";
 import { Link } from "react-router";
 import useAuth from "../../../Hooks/useAuth";
+import Swal from "sweetalert2";
+import LoadingSpinner from "../../../Shard/LoadingSpinner/LoadingSpinner";
 
 const AllMeals = () => {
   const axiosSecure = useAxiosSecure();
-  const {user} = useAuth()
-  console.log(user)
+  const { user } = useAuth();
+  console.log(user);
   const [page, setPage] = useState(1);
-  const [sortBy, setSortBy] = useState(""); // "likes" or "reviews_count"
+  const [sortBy, setSortBy] = useState("");
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["allMeals", page, sortBy],
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -20,7 +22,33 @@ const AllMeals = () => {
       return res.data;
     },
   });
-  console.log(data)
+
+  const handleDelete = async (id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const res = await axiosSecure.delete(`/meals/${id}`);
+        if (res.data.deletedCount > 0) {
+          Swal.fire("Deleted!", "Meal has been deleted.", "success");
+          refetch(); //  Refetch the updated meals list
+        } else {
+          Swal.fire("Error", "Meal could not be deleted.", "error");
+        }
+      } catch (err) {
+        Swal.fire("Error", "Something went wrong.", "error");
+      }
+    }
+  };
+  if(isLoading) return <LoadingSpinner/>
 
   return (
     <div>
@@ -54,8 +82,16 @@ const AllMeals = () => {
                   {" "}
                   <button className="btn btn-xs btn-info">View</button>{" "}
                 </Link>
-                <button className="btn btn-xs btn-warning">Update</button>
-                <button className="btn btn-xs btn-error">Delete</button>
+                <Link to={`/dashboard/updateMeal/${meal._id}`}>
+                  {" "}
+                  <button className="btn btn-xs btn-warning">Update</button>
+                </Link>
+                <button
+                  onClick={() => handleDelete(meal._id)}
+                  className="btn btn-xs btn-error"
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
