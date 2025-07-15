@@ -41,7 +41,7 @@ const AddMeal = () => {
         likes: 0,
         reviews_count: 0,
       };
-      console.log(mealData)
+ 
 
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/meals`,
@@ -50,7 +50,7 @@ const AddMeal = () => {
 
       if (res.data.insertedId) {
         Swal.fire("Success", "Meal added successfully!", "success");
-        reset();
+        // reset();
         if (fileInputRef.current) fileInputRef.current.value = "";
       } else {
         Swal.fire("Error", "Failed to add meal", "error");
