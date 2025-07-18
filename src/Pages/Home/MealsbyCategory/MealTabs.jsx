@@ -6,7 +6,7 @@ import { Link } from "react-router";
 const MealTabs = () => {
   const [activeTab, setActiveTab] = useState("All");
   const [meals, setMeals] = useState([]);
-
+console.log(meals)
   useEffect(() => {
     const fetchMeals = async () => {
       const res = await axios.get(
@@ -18,9 +18,10 @@ const MealTabs = () => {
   }, [activeTab]);
 
   const tabs = ["All", "Breakfast", "Lunch", "Dinner"];
-  if (meals && 0) {
+  if (meals.length === 0) {
     return <EmptyPage />;
   }
+  
   return (
     <div className="max-w-6xl mx-auto mt-10 px-4">
       {/* Tab Menu */}

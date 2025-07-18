@@ -16,6 +16,9 @@ const BannerSlider = () => {
     // autoplay: true,
     autoplaySpeed: 4000,
   };
+  const handleClick = (e) =>{
+    e.preventDefault()
+  }
 
   return (
     <div className="relative w-full mt-2 pb-7">
@@ -51,12 +54,12 @@ const BannerSlider = () => {
             {/*  Search Bar Inside Banner */}
             <form className="flex relative w-full max-w-md shadow-md">
               <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-white" />
-              <input
+              <input 
                 type="text"
                 placeholder="Search meals, reviews..."
                 className="w-full  pl-10 py-2 border text-white rounded-l-md focus:outline-none"
               />
-              <button
+              <button onClick={handleClick}
                 type="submit"
                 className="bg-info text-white  px-4 rounded-r-md hover:bg-info-dark transition-colors"
               >
@@ -102,7 +105,7 @@ const BannerSlider = () => {
                 border
                 rounded-l-md focus:outline-none"
               />
-              <button
+              <button  onClick={handleClick}
                 type="submit"
                 className="bg-info text-white px-4 rounded-r-md hover:bg-info-dark transition-colors"
               >

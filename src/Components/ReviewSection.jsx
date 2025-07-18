@@ -1,49 +1,51 @@
 import { useQuery } from "@tanstack/react-query";
-import Swal from "sweetalert2";
 import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useParams } from "react-router";
-
-const ReviewSection = ({ mealId, mealRefetch}) => {
+const ReviewSection = ({ mealId, mealRefetch }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [reviewText, setReviewText] = useState("");
-  const { id } = useParams();
+
   const { data: reviews = [], refetch } = useQuery({
     queryKey: ["reviews", mealId],
     queryFn: async () => {
       const res = await axiosSecure.get(`/reviews/${mealId}`);
       return res.data;
     },
+    enabled: !!mealId,
   });
-    const { data: meal = {}, } = useQuery({
-    queryKey: ["meal", id],
+
+
+  const { data: meal = {} } = useQuery({
+    queryKey: ["meal", mealId],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/meals/${id}`);
+      const res = await axiosSecure.get(`/meals/${mealId}`);
       return res.data;
     },
+    enabled: !!mealId,
   });
-
   console.log(meal)
+
   const handleReview = async () => {
     if (!reviewText) return;
-
     await axiosSecure.post("/reviews", {
       mealId,
       email: user.email,
       text: reviewText,
-      likes:meal.likes,
-      title:meal.title,
-      reviews_count:meal.reviews_count,
+      likes: meal.likes,
+      title: meal.title,
+      reviews_count: meal.reviews_count,
       date: new Date(),
     });
 
+    
+
     setReviewText("");
-    toast.success("Review Added Successfully!","success");
+    toast.success("Review Added Successfully!");
     refetch();
-    mealRefetch()
+    mealRefetch();
   };
 
   return (

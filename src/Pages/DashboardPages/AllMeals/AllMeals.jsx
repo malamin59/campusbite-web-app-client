@@ -2,13 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useState } from "react";
 import { Link } from "react-router";
-import useAuth from "../../../Hooks/useAuth";
+
 import Swal from "sweetalert2";
 import Pagination from "../../../Shard/Pagination/Pagination";
+import EmptyPage from "../../../Shard/Empty/EmptyPage";
 
 const AllMeals = () => {
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
+ 
   const [page, setPage] = useState(1);
   const [sortBy, setSortBy] = useState("");
 
@@ -47,7 +48,7 @@ const AllMeals = () => {
     { label: "Rating", key: "rating" },
     { label: "Distributor", key: "distributor_name" },
   ];
-
+if(data?.meals.length === 0) return <EmptyPage/> 
   return (
     <Pagination
       headers={headers}

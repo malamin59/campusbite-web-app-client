@@ -16,10 +16,9 @@ import Swal from "sweetalert2";
 import useAuth from "../Hooks/useAuth";
 import { FiLogOut } from "react-icons/fi";
 
-
 const DashboardLayout = () => {
   const { logOut } = useAuth();
-  
+
   const handleLogout = async () => {
     try {
       const result = await Swal.fire({
@@ -31,10 +30,10 @@ const DashboardLayout = () => {
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, logout!",
       });
-  
+
       if (result.isConfirmed) {
         await logOut();
-  
+
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -50,7 +49,6 @@ const DashboardLayout = () => {
     }
   };
 
-
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [role, isRoleLoading] = useRole();
   console.log("your role is", role);
@@ -60,6 +58,7 @@ const DashboardLayout = () => {
     <>
       {role === "user" && (
         <>
+
           <NavLink
             to="/dashboard/userProfile"
             className={({ isActive }) =>
@@ -132,7 +131,7 @@ const DashboardLayout = () => {
             }
             onClick={() => setSidebarOpen(false)}
           >
-            <FaUtensils /> Added Meals
+            <FaUtensils /> Add Meals
           </NavLink>
           <NavLink
             to="/dashboard/users"
@@ -193,14 +192,18 @@ const DashboardLayout = () => {
           >
             <FaClipboardList /> All Meals
           </NavLink>
-          <div className="mt-[100%]">
-            <button onClick={handleLogout} className="btn btn-info w-full flex items-center justify-center gap-2">
-  <FiLogOut />
-  Logout
-</button>
-          </div>
         </>
       )}
+{/* logout  */}
+      <div className="mt-[100%] ">
+        <button
+          onClick={handleLogout}
+          className="btn btn-info w-full flex items-center justify-center gap-2"
+        >
+          <FiLogOut />
+          Logout
+        </button>
+      </div>
     </>
   );
 
