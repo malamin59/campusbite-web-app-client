@@ -22,6 +22,7 @@ const AllMeals = () => {
       return res.data;
     },
   });
+  console.log(data)
 
   const handleDelete = async (id) => {
     const result = await Swal.fire({

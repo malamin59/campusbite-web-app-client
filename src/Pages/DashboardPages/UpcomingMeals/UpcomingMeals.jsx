@@ -84,7 +84,7 @@ const UpcomingMeals = () => {
   };
 
   return (
-    <div className="grid md:grid-cols-3 gap-6 p-6">
+    <div className=" lg:w-7xl mx-auto grid  lg:grid-cols-4 md:grid-cols-2 gap-6 p-6">
       {meals.map((meal) => (
         <div key={meal._id} className="card shadow-md bg-base-100">
           <figure>

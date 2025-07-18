@@ -26,6 +26,7 @@ import UserRout from "./UserRout";
 import MealDetails from "../Pages/MealDetails/MealDetails";
 import UpdateReview from "../Components/UpdateReview";
 import UpdateMeal from "../Components/UpdateMeal";
+import UpcomingMealsForAdmin from "../Pages/DashboardPages/upconingMeal/UpcomingMealsForAdmin";
 
 const router = createBrowserRouter([
   {
@@ -139,7 +140,7 @@ const router = createBrowserRouter([
         element: (
           <AdminRouts>
             {" "}
-            <UpcomingMeals />
+            <UpcomingMealsForAdmin/>
           </AdminRouts>
         ),
       },

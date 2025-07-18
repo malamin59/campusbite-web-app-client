@@ -44,7 +44,7 @@ const AllReviews = () => {
           };
         });
       }
-    }
+    } 
   };
 
   if (isLoading) return <LoadingSpinner />;
