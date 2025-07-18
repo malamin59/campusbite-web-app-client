@@ -2,7 +2,10 @@ import useAuth from "../../Hooks/useAuth";
 import LoadingSpinner from "../../Shard/LoadingSpinner/LoadingSpinner";
 import Badges from "./Badge/Badges"; 
 import Banner from "./Banner/Banner";
+import HowItWorks from "./HowItWork/HowItWorks";
 import MealTabs from "./MealsbyCategory/MealTabs";
+import SpecialFeatures from "./SpecialFeatures/SpecialFeatures";
+import WhyChooseUs from "./WhyChooseUs/WhyChooseUs";
 
 const Home = () => {
 
@@ -15,6 +18,9 @@ const Home = () => {
       <Banner />
       <Badges/>
       <MealTabs/>
+      <HowItWorks/>
+      <WhyChooseUs/>
+      <SpecialFeatures/>
     </div>
   );
 };
