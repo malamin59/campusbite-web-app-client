@@ -52,7 +52,7 @@ const ServeMeals = () => {
   const actions = (row) => [
     <button
       key="serve"
-      className="btn btn-sm btn-success"
+      className="btn  btn-sm btn-info"
       onClick={() => handleServe(row._id)}
       disabled={row.status === "delivered"}
     >

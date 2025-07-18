@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Pagination from "../../../Shard/Pagination/Pagination";
+import { Link } from "react-router";
 
 const UpcomingMealsForAdmin = () => {
   const axiosSecure = useAxiosSecure();
@@ -10,15 +11,17 @@ const UpcomingMealsForAdmin = () => {
   const { data = {}, refetch } = useQuery({
     queryKey: ["upcomingMeals", page],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/upcomingMeals?page=${page}&limit=10`);
+      const res = await axiosSecure.get(
+        `/upcoming-meals?page=${page}&limit=10`
+      );
       return res.data;
     },
   });
-  
+
   const meals = data.meals || [];
   const total = data.total || 0;
-  console.log(data)
-  console.log(data.total)
+  console.log(data);
+  console.log(data);
 
   const headers = [
     { label: "Title", key: "title" },
@@ -39,7 +42,7 @@ const UpcomingMealsForAdmin = () => {
     <button
       key="publish"
       onClick={() => handlePublish(meal._id)}
-      className="btn btn-sm btn-success"
+      className="btn btn-sm btn-info"
     >
       Publish
     </button>,
@@ -53,7 +56,10 @@ const UpcomingMealsForAdmin = () => {
     <div>
       <div className="flex justify-between items-center">
         <h2 className="text-xl font-bold mb-4">Upcoming Meals</h2>
-        <button className="btn btn-info">+ Add Upcoming Meal</button>
+        <Link to={`/dashboard/addedMeals`} className="btn btn-info btn-sm">
+          {" "}
+        + Add Upcoming Meal{" "}
+        </Link>
       </div>
 
       <Pagination

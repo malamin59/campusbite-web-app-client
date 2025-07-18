@@ -28,7 +28,7 @@ const Pagination = ({
                 )}
               </th>
             ))}
-            {actions && <th className="whitespace-nowrap lg:pl-16">Actions</th>}
+            {actions && <th className="whitespace-nowrap">Actions</th>}
           </tr>
         </thead>
 
