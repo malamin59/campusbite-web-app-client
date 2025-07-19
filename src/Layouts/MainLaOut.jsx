@@ -4,7 +4,7 @@ import Navbar from "../Shard/Navbar";
 
 const MainLaOut = () => {
   return (
-    <div className="bg-white">
+    <div className=" overflow-x-hidden bg-white">
       <Navbar />
       <div className=" min-h-[calc(100vh-68px)]">
         <Outlet />

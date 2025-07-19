@@ -21,7 +21,7 @@ const MealDetails = () => {
   });
 
   /* get the user data for check the user Badge */
-  const { data:userData } = useQuery({
+  const { data: userData } = useQuery({
     queryKey: ["user"],
     enabled: !!user?.email,
     queryFn: async () => {
@@ -30,7 +30,11 @@ const MealDetails = () => {
     },
   });
 
+  console.table(userData?.email);
+
   const handleLike = async () => {
+    if (user.email === meal?.distributor_email)
+      return toast.error("you can't like you own post ");
     if (!user)
       return Swal.fire("Login Required", "Please login to like", "warning");
     await axiosSecure.patch(`/meals/like/${id}`);
@@ -39,6 +43,7 @@ const MealDetails = () => {
   };
 
   const handleRequestMeal = async () => {
+    if (user.email === meal?.distributor_email) return toast.error("you can't request your meal")
     if (!user) return Swal.fire("Login Required", "Please login", "warning");
     if (userData?.badge === "Bronze") {
       return toast.error(
@@ -52,12 +57,13 @@ const MealDetails = () => {
       userName: user?.displayName,
       status: "pending",
       reviews_count: meal.reviews_count,
-      title:meal.title,
-      likes:meal.likes
+      title: meal.title,
+      likes: meal.likes,
     });
 
     Swal.fire("Requested!", "Your meal request is pending", "success");
   };
+  // if(user.email === user)
 
   return (
     <div className="max-w-4xl mx-auto my-4 p-6 bg-base-200 rounded-lg">
@@ -104,7 +110,7 @@ const MealDetails = () => {
         <h3 className="text-xl font-semibold mb-2">
           Reviews ({meal.reviews_count})
         </h3>
-        <ReviewSection mealId={id}  mealRefetch={refetch}  />
+        <ReviewSection userData={meal} mealId={id} mealRefetch={refetch} />
       </div>
     </div>
   );

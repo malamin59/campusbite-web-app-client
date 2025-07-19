@@ -14,8 +14,8 @@ const Navbar = () => {
           }
         >
           Home
-          </NavLink>
-        </li>
+        </NavLink>
+      </li>
       <li className="px-1">
         <NavLink
           to="/meals"
@@ -50,11 +50,11 @@ const Navbar = () => {
   );
 
   return (
-    <div className="drawer-content pt-16 lg:pt-20">
+    <div className="drawer  fixed top-0 z-50">
       <input id="drawer-toggle" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         {/* Navbar */}
-        <div className="navbar fixed top-0 z-50 bg-base-100 shadow-sm ">
+        <div className="navbar bg-base-100 shadow-sm ">
           {/* Left side (hamburger + logo) */}
           <div className="navbar-start ">
             <label htmlFor="drawer-toggle" className="btn btn-ghost p-0   lg:hidden">

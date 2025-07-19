@@ -36,7 +36,7 @@ const SpecialFeatures = () => {
   ];
 
   return (
-    <section className="bg-white py-20 px-6 md:px-10">
+    <section className="bg-white py-20 lg:px-0 px-6">
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold text-info mb-3">What Makes CampusBite Special?</h2>
         <p className="text-gray-600 text-lg max-w-2xl mx-auto">

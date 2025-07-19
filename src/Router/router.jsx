@@ -41,20 +41,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/meals",
-        element: (
-          <PrivateRoute>
-            <Meals />
-          </PrivateRoute>
-        ),
+        element: <Meals />,
       },
       {
         path: "/upcomingMeals",
-        element: (
-          <PrivateRoute>
-            {" "}
-            <UpcomingMeals />
-          </PrivateRoute>
-        ),
+        element: <UpcomingMeals />,
       },
       {
         path: "/checkoutPage/:id",
@@ -69,7 +60,11 @@ const router = createBrowserRouter([
       },
       {
         path: "meal/:id",
-        element: <MealDetails />,
+        element: (
+          <PrivateRoute>
+            <MealDetails />
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -140,7 +135,7 @@ const router = createBrowserRouter([
         element: (
           <AdminRouts>
             {" "}
-            <UpcomingMealsForAdmin/>
+            <UpcomingMealsForAdmin />
           </AdminRouts>
         ),
       },
@@ -177,10 +172,7 @@ const router = createBrowserRouter([
         path: "my-reviews",
         element: (
           <UserRout>
-            {" "}
-            <UserRout>
-              <MyReviews />
-            </UserRout>
+            <MyReviews />
           </UserRout>
         ),
       },
@@ -193,15 +185,7 @@ const router = createBrowserRouter([
           </UserRout>
         ),
       },
-      {
-        path: "upcomingMeals",
-        element: (
-          <UserRout>
-            {" "}
-            <UpcomingMeals />
-          </UserRout>
-        ),
-      },
+      
       {
         path: "/dashboard/updateReview/:id",
         element: (

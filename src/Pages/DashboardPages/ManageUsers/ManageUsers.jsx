@@ -4,14 +4,19 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Pagination from "../../../Shard/Pagination/Pagination";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
+import EmptyPage from "../../../Shard/Empty/EmptyPage";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
-const { user } = useAuth()
+  const { user } = useAuth();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
 
-  const { data = {}, refetch, isLoading } = useQuery({
+  const {
+    data = {},
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["users", page, search],
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -21,6 +26,7 @@ const { user } = useAuth()
     },
     keepPreviousData: true,
   });
+  console.log(data);
 
   const users = data.users || [];
   const total = data.total || 0;
@@ -76,7 +82,7 @@ const { user } = useAuth()
     setSearch(e.target.value);
     setPage(1);
   };
-
+  if (data.total === 0) return <EmptyPage />;
   return (
     <div className="p-6">
       <h2 className="text-xl font-bold mb-4">Manage Users</h2>

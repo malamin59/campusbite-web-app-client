@@ -3,6 +3,8 @@ import { useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Pagination from "../../../Shard/Pagination/Pagination";
 import { Link } from "react-router";
+import EmptyPage from "../../../Shard/Empty/EmptyPage";
+import toast from "react-hot-toast";
 
 const UpcomingMealsForAdmin = () => {
   const axiosSecure = useAxiosSecure();
@@ -32,6 +34,7 @@ const UpcomingMealsForAdmin = () => {
   const handlePublish = async (id) => {
     try {
       await axiosSecure.patch(`/meals/publish/${id}`);
+      toast.success("meal Publish Successfully!")
       refetch();
     } catch (error) {
       console.error("Publish error:", error);
@@ -51,6 +54,7 @@ const UpcomingMealsForAdmin = () => {
   const handleSort = (key) => {
     // Optional: Add client-side sorting if needed
   };
+  if(data.total === 0) return <EmptyPage/>
 
   return (
     <div>

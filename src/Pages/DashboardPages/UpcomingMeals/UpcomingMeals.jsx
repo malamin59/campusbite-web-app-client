@@ -4,13 +4,15 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
 import { toast } from "react-hot-toast";
 import Swal from "sweetalert2";
+import EmptyPage from "../../../Shard/Empty/EmptyPage";
+import useRole from "../../../Hooks/UseRole";
 
 const UpcomingMeals = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [likedMeals, setLikedMeals] = useState([]);
+  const [role] = useRole();
 
-  /* get the user data for check the user Badge */
   const { data: userData } = useQuery({
     queryKey: ["user"],
     enabled: !!user?.email,
@@ -20,7 +22,6 @@ const UpcomingMeals = () => {
     },
   });
 
-  // Get upcoming meals
   const { data: meals = [], refetch } = useQuery({
     queryKey: ["upcomingMeals"],
     queryFn: async () => {
@@ -29,21 +30,20 @@ const UpcomingMeals = () => {
     },
   });
 
+  const upcomingMeals = meals.filter(meal => meal.option === "UpComingMeal");
+
   useEffect(() => {
-    if (!user?.email || meals.length === 0) return;
-    const liked = meals
+    if (!user?.email || upcomingMeals.length === 0) return;
+    const liked = upcomingMeals
       .filter((meal) => meal?.liked_users?.includes(user.email))
       .map((meal) => meal._id);
 
     setLikedMeals(liked);
-  }, [meals, user]);
+  }, [upcomingMeals, user]);
 
-  // Handle Like
   const handleLike = async (mealId) => {
     if (userData?.badge === "Bronze") {
-      return toast.error(
-        "Only Silver, Gold, or Platinum users can request meals."
-      );
+      return toast.error("Only Silver, Gold, or Platinum users can like meals.");
     }
 
     if (likedMeals.includes(mealId)) {
@@ -58,34 +58,18 @@ const UpcomingMeals = () => {
       if (res.data.modifiedCount > 0) {
         toast.success("Thanks for liking!");
         setLikedMeals((prev) => [...prev, mealId]);
-        refetch(); // Refetch to update likes
+        refetch(); // refetch to update likes + filter again
       }
     } catch (error) {
       toast.error("Error liking the meal.");
     }
   };
 
-  // Handle Admin Publish
-  const handlePublish = async (mealId) => {
-    const confirm = await Swal.fire({
-      title: "Publish this meal?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonText: "Yes, publish it!",
-    });
-
-    if (confirm.isConfirmed) {
-      const res = await axiosSecure.patch(`/meals/publish/${mealId}`);
-      if (res.data.modifiedCount > 0) {
-        Swal.fire("Published!", "Meal moved to main meals.", "success");
-        refetch();
-      }
-    }
-  };
+  if (upcomingMeals.length === 0) return <EmptyPage />;
 
   return (
-    <div className=" lg:w-7xl mx-auto grid  lg:grid-cols-4 md:grid-cols-2 gap-6 p-6">
-      {meals.map((meal) => (
+    <div className="lg:w-7xl mx-auto grid lg:grid-cols-4 md:grid-cols-2 gap-6 p-6">
+      {upcomingMeals.map((meal) => (
         <div key={meal._id} className="card shadow-md bg-base-100">
           <figure>
             <img
@@ -97,27 +81,16 @@ const UpcomingMeals = () => {
           <div className="card-body">
             <h2 className="card-title">{meal.title}</h2>
             <p>{meal.description}</p>
-            <p>
-              <strong>Likes:</strong> {meal.likes}
-            </p>
+            <p><strong>Likes:</strong> {meal.likes}</p>
 
             <div className="flex justify-between mt-4">
               <button
-                className="btn btn-sm btn-outline btn-success"
+                className="btn btn-sm btn-outline btn-info"
                 disabled={likedMeals.includes(meal._id)}
                 onClick={() => handleLike(meal._id)}
               >
                 👍 Like
               </button>
-
-              {user?.role === "admin" && (
-                <button
-                  className="btn btn-sm btn-outline btn-primary"
-                  onClick={() => handlePublish(meal._id)}
-                >
-                  🚀 Publish
-                </button>
-              )}
             </div>
           </div>
         </div>

@@ -10,12 +10,20 @@ const Pagination = ({
   onSort,
 }) => {
   return (
-    <div className="w-full overflow-x-auto">
-      <table className="table w-full mt-6 text-sm">
+    // 1. Wrapping div allows horizontal scroll but prevent page scroll
+    <div
+      className="w-full overflow-x-auto"
+      style={{ maxWidth: "100vw" }} // prevent div expanding beyond viewport
+    >
+      <table className="table w-full min-w-[700px] mt-6 text-sm">
         <thead className="bg-base-200">
           <tr>
             {headers.map((header, index) => (
-              <th key={index} className="whitespace-nowrap">
+              <th
+                key={index}
+                className="whitespace-nowrap max-w-[200px] truncate"
+                title={header.label} // tooltip for truncated headers
+              >
                 {header.sortKey ? (
                   <button
                     onClick={() => onSort(header.sortKey)}
@@ -28,7 +36,11 @@ const Pagination = ({
                 )}
               </th>
             ))}
-            {actions && <th className="whitespace-nowrap">Actions</th>}
+            {actions && (
+              <th className="whitespace-nowrap max-w-[200px] truncate" title="Actions">
+                Actions
+              </th>
+            )}
           </tr>
         </thead>
 
@@ -36,12 +48,16 @@ const Pagination = ({
           {rows.map((row, i) => (
             <tr key={i}>
               {headers.map((header, j) => (
-                <td key={j} className="whitespace-nowrap">
+                <td
+                  key={j}
+                  className="whitespace-nowrap max-w-[200px] truncate"
+                  title={row[header.key]}
+                >
                   {row[header.key]}
                 </td>
               ))}
               {actions && (
-                <td className="flex flex-wrap gap-2 py-2">
+                <td className="flex flex-wrap gap-2 py-2 max-w-[200px] truncate" title="Actions">
                   {actions(row).map((actionBtn, k) => (
                     <span key={k}>{actionBtn}</span>
                   ))}
@@ -79,4 +95,5 @@ Pagination.propTypes = {
   setPage: PropTypes.func,
   onSort: PropTypes.func,
 };
+
 export default Pagination;

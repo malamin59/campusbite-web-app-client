@@ -13,6 +13,7 @@ import {
 // import axios from "axios";
 import { auth } from "../firebase/firebase.config";
 import { AuthContext } from "./AuthContext";
+import axios from "axios";
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -50,31 +51,33 @@ const AuthProvider = ({ children }) => {
   // onAuthStateChange
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      // console.log('CurrentUser-->', currentUser?.email)
+      console.log("Auth Changed:", currentUser?.email);
+
       setUser(currentUser);
-      //   if (currentUser?.email) {
-      //   setUser(currentUser);
-
-      //     // Get JWT token
-      //     await axios.post(
-      //       `${import.meta.env.VITE_API_URL}/jwt`,
-      //       {
-      //         email: currentUser?.email,
-      //       },
-      //       { withCredentials: true }
-      //     );
-      //   } else {
-      //     setUser(currentUser);
-      //     await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
-      //       withCredentials: true,
-      //     });
-      //   }
-
       setLoading(false);
+
+      if (currentUser?.email) {
+        try {
+          await axios.post(
+            `${import.meta.env.VITE_API_URL}/jwt`,
+            { email: currentUser.email },
+            { withCredentials: true }
+          );
+        } catch (err) {
+          console.error(" Error setting JWT:", err.message);
+        }
+      } else {
+        try {
+          await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
+            withCredentials: true,
+          });
+        } catch (err) {
+          console.error(" Error on logout:", err.message);
+        }
+      }
     });
-    return () => {
-      return unsubscribe();
-    };
+
+    return () => unsubscribe();
   }, []);
 
   const authInfo = {

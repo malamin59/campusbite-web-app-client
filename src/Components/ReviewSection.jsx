@@ -3,11 +3,12 @@ import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useState } from "react";
 import toast from "react-hot-toast";
-const ReviewSection = ({ mealId, mealRefetch }) => {
+const ReviewSection = ({ mealId, mealRefetch, userData }) => {
+  
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [reviewText, setReviewText] = useState("");
-
+  
   const { data: reviews = [], refetch } = useQuery({
     queryKey: ["reviews", mealId],
     queryFn: async () => {
@@ -16,7 +17,10 @@ const ReviewSection = ({ mealId, mealRefetch }) => {
     },
     enabled: !!mealId,
   });
+  
 
+  console.log(userData?.distributor_email)
+  console.log(user.email)
 
   const { data: meal = {} } = useQuery({
     queryKey: ["meal", mealId],
@@ -29,6 +33,7 @@ const ReviewSection = ({ mealId, mealRefetch }) => {
   console.log(meal)
 
   const handleReview = async () => {
+        if (user.email === userData?.distributor_email) return toast.error("you can't post your meal")
     if (!reviewText) return;
     await axiosSecure.post("/reviews", {
       mealId,

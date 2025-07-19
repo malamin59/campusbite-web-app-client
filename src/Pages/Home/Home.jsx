@@ -14,7 +14,7 @@ const Home = () => {
     return <LoadingSpinner />;
   }
   return (
-    <div className="overflow-x-hidden mx-1">
+    <div className=" mx-1">
       <Banner />
       <Badges/>
       <MealTabs/>

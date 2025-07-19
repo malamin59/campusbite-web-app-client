@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Pagination from "../../../Shard/Pagination/Pagination";
 import { FiSearch } from "react-icons/fi";
 import toast from "react-hot-toast";
+import EmptyPage from "../../../Shard/Empty/EmptyPage";
 
 const ServeMeals = () => {
   const axiosSecure = useAxiosSecure();
@@ -59,7 +60,8 @@ const ServeMeals = () => {
       {row.status === "delivered" ? "Served" : "Serve"}
     </button>,
   ];
-
+if(data.total === 0) return <EmptyPage/>
+ 
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4">Serve Requested Meals</h2>
@@ -70,7 +72,7 @@ const ServeMeals = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search by name or email"
-          className="input input-bordered w-full rounded-r-none"
+          className="input  focus:outline-none w-full rounded-r-none"
         />
         <button className="btn btn-info rounded-l-none">
           <FiSearch />
