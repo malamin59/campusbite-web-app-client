@@ -1,5 +1,6 @@
 import useAuth from "../../Hooks/useAuth";
 import LoadingSpinner from "../../Shard/LoadingSpinner/LoadingSpinner";
+import CommentList from "../comment/CommentList";
 import Badges from "./Badge/Badges"; 
 import Banner from "./Banner/Banner";
 import HowItWorks from "./HowItWork/HowItWorks";
@@ -21,6 +22,7 @@ const Home = () => {
       <HowItWorks/>
       <WhyChooseUs/>
       <SpecialFeatures/>
+      <CommentList/>
     </div>
   );
 };
