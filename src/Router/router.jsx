@@ -27,6 +27,7 @@ import MealDetails from "../Pages/MealDetails/MealDetails";
 import UpdateReview from "../Components/UpdateReview";
 import UpdateMeal from "../Components/UpdateMeal";
 import UpcomingMealsForAdmin from "../Pages/DashboardPages/upconingMeal/UpcomingMealsForAdmin";
+import Comment from "../Pages/comment/Comment";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,12 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path:'comment',
+        element: <PrivateRoute>
+          <Comment/>
+        </PrivateRoute>
+      }
     ],
   },
   {

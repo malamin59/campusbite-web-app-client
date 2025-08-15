@@ -1,7 +1,7 @@
 # 🏨 CampusBite - Hostel Management System
 
 **Live Site URL:** [https://campusbite-3dd62.web.app](https://campusbite-3dd62.web.app)  
-**Admin Login Email:** alaminhossen176266@gmail.com  
+**Admin Login Email:** alaminhossen@gmail.com
 **Admin Password:** 123456
 
 ---

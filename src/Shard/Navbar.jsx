@@ -36,6 +36,16 @@ const Navbar = () => {
           Upcoming Meals
         </NavLink>
       </li>
+      <li className="px-1">
+        <NavLink
+          to="/comment"
+          className={({ isActive }) =>
+            isActive ? "btn btn-sm btn-info text-white" : "text-info hover:underline"
+          }
+        >
+         Comment
+        </NavLink>
+      </li>
       <li className="px-1 relative">
         <div>
           <button className="btn btn-sm btn-ghost text-info relative">

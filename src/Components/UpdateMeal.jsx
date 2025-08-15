@@ -3,13 +3,11 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-
 import { useParams } from "react-router";
 import { imageUpload } from "../Api/Utils/util";
 import useAuth from "../Hooks/useAuth";
 
 const UpdateMeal = () => {
-
   const { id } = useParams();
   const {
     register,
@@ -24,6 +22,7 @@ const UpdateMeal = () => {
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_API_URL}/meals/${id}`).then((res) => {
       const meal = res.data;
+      console.log("Fetched meal data:", meal);
       reset({
         title: meal.title,
         category: meal.category,
@@ -88,7 +87,7 @@ const UpdateMeal = () => {
           </label>
           <input
             id="title"
-            {...register("title", { required: "Title is required" })}
+            {...register("title")}
             className="input input-bordered w-full"
           />
           {errors.title && (
@@ -103,7 +102,7 @@ const UpdateMeal = () => {
           </label>
           <select
             id="category"
-            {...register("category", { required: "Category is required" })}
+            {...register("category")}
             className="select select-bordered w-full"
           >
             <option value="">Select category</option>
@@ -135,7 +134,7 @@ const UpdateMeal = () => {
           </label>
           <textarea
             id="ingredients"
-            {...register("ingredients", { required: "Ingredients required" })}
+            {...register("ingredients")}
             className="textarea textarea-bordered w-full"
             rows={2}
           />
@@ -148,7 +147,7 @@ const UpdateMeal = () => {
           </label>
           <textarea
             id="description"
-            {...register("description", { required: "Description required" })}
+            {...register("description")}
             className="textarea textarea-bordered w-full"
             rows={2}
           />
@@ -164,7 +163,6 @@ const UpdateMeal = () => {
             type="number"
             step="0.01"
             {...register("price", {
-              required: "Price is required",
               min: { value: 0.01, message: "Price must be positive" },
             })}
             className="input input-bordered w-full"

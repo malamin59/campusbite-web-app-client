@@ -42,7 +42,6 @@ const AddMeal = () => {
         reviews_count: 0,
         option: data.option
       };
-      console.log(mealData)
 
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/meals`,
