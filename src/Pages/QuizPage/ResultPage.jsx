@@ -1,6 +1,13 @@
 import { useEffect } from "react";
 import Swal from "sweetalert2";
-import { FaSmile, FaStar, FaThumbsUp, FaFrown, FaSadTear, FaCheck } from "react-icons/fa";
+import {
+  FaSmile,
+  FaStar,
+  FaThumbsUp,
+  FaFrown,
+  FaSadTear,
+  FaCheck,
+} from "react-icons/fa";
 import ReactDOMServer from "react-dom/server";
 
 const ResultPage = ({ score, total, onRestart }) => {
@@ -13,19 +20,29 @@ const ResultPage = ({ score, total, onRestart }) => {
 
     if (percentage === 100) {
       title = "Congratulations!";
-      iconHTML = ReactDOMServer.renderToStaticMarkup(<FaSmile className="text-4xl text-green-500 mx-auto mb-2" />);
+      iconHTML = ReactDOMServer.renderToStaticMarkup(
+        <FaSmile className="text-4xl text-green-500 mx-auto mb-2" />
+      );
     } else if (percentage >= 80) {
       title = "Very Good!";
-      iconHTML = ReactDOMServer.renderToStaticMarkup(<FaStar className="text-4xl text-yellow-400 mx-auto mb-2" />);
+      iconHTML = ReactDOMServer.renderToStaticMarkup(
+        <FaStar className="text-4xl text-yellow-400 mx-auto mb-2" />
+      );
     } else if (percentage >= 50) {
       title = "Good!";
-      iconHTML = ReactDOMServer.renderToStaticMarkup(<FaThumbsUp className="text-4xl text-blue-500 mx-auto mb-2" />);
+      iconHTML = ReactDOMServer.renderToStaticMarkup(
+        <FaThumbsUp className="text-4xl text-blue-500 mx-auto mb-2" />
+      );
     } else if (percentage >= 30) {
       title = "Try Next Time!";
-      iconHTML = ReactDOMServer.renderToStaticMarkup(<FaFrown className="text-4xl text-orange-400 mx-auto mb-2" />);
+      iconHTML = ReactDOMServer.renderToStaticMarkup(
+        <FaFrown className="text-4xl text-orange-400 mx-auto mb-2" />
+      );
     } else {
       title = "Very Bad!";
-      iconHTML = ReactDOMServer.renderToStaticMarkup(<FaSadTear className="text-4xl text-red-500 mx-auto mb-2" />);
+      iconHTML = ReactDOMServer.renderToStaticMarkup(
+        <FaSadTear className="text-4xl text-red-500 mx-auto mb-2" />
+      );
     }
 
     Swal.fire({
