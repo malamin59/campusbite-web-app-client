@@ -1,6 +1,13 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
-import { FaSmile, FaStar, FaThumbsUp, FaFrown, FaSadTear } from "react-icons/fa";
+import {
+  FaSmile,
+  FaStar,
+  FaThumbsUp,
+  FaFrown,
+  FaSadTear,
+  FaCheck,
+} from "react-icons/fa";
 import ReactDOMServer from "react-dom/server";
 import { questions } from "./questions";
 
@@ -18,7 +25,10 @@ const QuizPage = () => {
       setCurrent(current + 1);
     } else {
       setFinished(true);
-      showResultAlert(score + (option === questions[current].correct ? 1 : 0), questions.length);
+      showResultAlert(
+        score + (option === questions[current].correct ? 1 : 0),
+        questions.length
+      );
     }
   };
 
@@ -30,19 +40,29 @@ const QuizPage = () => {
 
     if (percentage === 100) {
       title = "Congratulations!";
-      iconHTML = ReactDOMServer.renderToStaticMarkup(<FaSmile className="text-4xl text-green-500 mx-auto mb-2"/>);
+      iconHTML = ReactDOMServer.renderToStaticMarkup(
+        <FaSmile className="text-4xl text-green-500 mx-auto mb-2" />
+      );
     } else if (percentage >= 80) {
       title = "Very Good!";
-      iconHTML = ReactDOMServer.renderToStaticMarkup(<FaStar className="text-4xl text-yellow-400 mx-auto mb-2"/>);
+      iconHTML = ReactDOMServer.renderToStaticMarkup(
+        <FaStar className="text-4xl text-yellow-400 mx-auto mb-2" />
+      );
     } else if (percentage >= 50) {
       title = "Good!";
-      iconHTML = ReactDOMServer.renderToStaticMarkup(<FaThumbsUp className="text-4xl text-blue-500 mx-auto mb-2"/>);
+      iconHTML = ReactDOMServer.renderToStaticMarkup(
+        <FaThumbsUp className="text-4xl text-blue-500 mx-auto mb-2" />
+      );
     } else if (percentage >= 30) {
       title = "Try Next Time!";
-      iconHTML = ReactDOMServer.renderToStaticMarkup(<FaFrown className="text-4xl text-orange-400 mx-auto mb-2"/>);
+      iconHTML = ReactDOMServer.renderToStaticMarkup(
+        <FaFrown className="text-4xl text-orange-400 mx-auto mb-2" />
+      );
     } else {
       title = "Very Bad!";
-      iconHTML = ReactDOMServer.renderToStaticMarkup(<FaSadTear className="text-4xl text-red-500 mx-auto mb-2"/>);
+      iconHTML = ReactDOMServer.renderToStaticMarkup(
+        <FaSadTear className="text-4xl text-red-500 mx-auto mb-2" />
+      );
     }
 
     Swal.fire({
@@ -56,12 +76,25 @@ const QuizPage = () => {
       showConfirmButton: true,
     });
   };
+  const handleQuizAgain = () => {
+    setCurrent(0);
+    setScore(0);
+    setFinished(false);
+  };
 
   if (finished) {
     return (
       <div className="text-center p-6">
         <h1 className="text-3xl font-bold mb-4">Quiz Finished!</h1>
-        <p className="text-xl">Check your result in the popup ✅</p>
+        <p className="text-xl flex items-center justify-center gap-2">
+          Check your result in the popup <FaCheck className="text-info" />
+        </p>
+        <button
+          onClick={handleQuizAgain}
+          className="bg-info  mt-6 text-white px-4 py-2 rounded hover:bg-sky-500"
+        >
+          Quiz Again
+        </button>
       </div>
     );
   }
