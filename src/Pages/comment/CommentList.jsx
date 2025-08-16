@@ -1,15 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { Link } from "react-router";
 
 const CommentList = () => {
   const [comments, setComments] = useState([]);
-  const [offsetY, setOffsetY] = useState(0);
-  const listRef = useRef(null);
-
-  const scrollSpeed = 1; // px per frame
-  const frameRate = 30; // interval in ms
 
   // Fetch all comments with Axios
   useEffect(() => {
@@ -21,20 +16,7 @@ const CommentList = () => {
         console.error(err);
       }
     };
-
     fetchComments();
-  }, []);
-
-  // Scrolling effect
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (listRef.current) {
-        const totalHeight = listRef.current.scrollHeight / 2;
-        setOffsetY((prev) => (prev >= totalHeight ? 0 : prev + scrollSpeed));
-      }
-    }, frameRate);
-
-    return () => clearInterval(interval);
   }, []);
 
   const formatDate = (isoString) => {
@@ -54,20 +36,29 @@ const CommentList = () => {
 
   return (
     <div className="mb-20">
-      <div className="text-center flex mt-10  flex-col  text-info">
-        <p className="text-3xl md:text-3xl lg:text-4xl italic font-bold">Our users say </p>
-        <Link className="mt-2 text-xl text-end hover:underline" to="/comment">
-        {" "}
-        write your comment
-      </Link>
+      {/* Title + Write Comment Link */}
+      <div className="text-center flex mt-10 flex-col text-info">
+        <p className="text-3xl md:text-3xl lg:text-4xl italic font-bold">
+          Our users say
+        </p>
+        <Link
+          className="mt-2 text-xl text-end hover:underline"
+          to="/comment"
+        >
+          write your comment
+        </Link>
       </div>
-      
 
+      {/* Auto Scrolling List */}
       <div className="relative h-[300px] my-10 w-full overflow-hidden p-4">
         <motion.div
-          ref={listRef}
-          style={{ y: -offsetY }}
           className="flex flex-col gap-4"
+          animate={{ y: ["-50%", "0%"] }}
+          transition={{
+            duration: 50, // scroll speed (increase = slower, decrease = faster)
+            repeat: Infinity,
+            ease: "linear",
+          }}
         >
           {[...comments, ...comments].map((comment, index) => (
             <div

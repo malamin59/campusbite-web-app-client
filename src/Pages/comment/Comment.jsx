@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Comment = () => {
   const { user } = useAuth();
@@ -21,10 +22,18 @@ const Comment = () => {
       title: data.title,
       description: data.description,
     };
-    const res = await axios.post(`${import.meta.env.VITE_API_URL}/comment`, commentUserData);
-    console.log(res)
+    const res = await axios.post(
+      `${import.meta.env.VITE_API_URL}/comment`,
+      commentUserData
+    );
+    console.log(res.data.acknowledged);
+    if (res.data.acknowledged === true)
+      toast.success("Your comment was added successfully", "success");
+    else {
+      toast.error("something went wrong");
+    }
     reset(); // Clear form after submission
-};
+  };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 border rounded-lg shadow-lg bg-white">

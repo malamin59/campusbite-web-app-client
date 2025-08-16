@@ -6,7 +6,6 @@ import { Link } from "react-router";
 const MealTabs = () => {
   const [activeTab, setActiveTab] = useState("All");
   const [meals, setMeals] = useState([]);
-console.log(meals)
   useEffect(() => {
     const fetchMeals = async () => {
       const res = await axios.get(

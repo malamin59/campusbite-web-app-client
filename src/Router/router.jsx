@@ -28,6 +28,7 @@ import UpdateReview from "../Components/UpdateReview";
 import UpdateMeal from "../Components/UpdateMeal";
 import UpcomingMealsForAdmin from "../Pages/DashboardPages/upconingMeal/UpcomingMealsForAdmin";
 import Comment from "../Pages/comment/Comment";
+import QuizPage from "../Pages/QuizPage/QuizPage";
 
 const router = createBrowserRouter([
   {
@@ -72,7 +73,15 @@ const router = createBrowserRouter([
         element: <PrivateRoute>
           <Comment/>
         </PrivateRoute>
-      }
+      },
+       {
+        path: "quiz",
+        element: (
+          <PrivateRoute>
+            <QuizPage/>
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
