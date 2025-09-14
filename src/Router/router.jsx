@@ -29,6 +29,7 @@ import UpdateMeal from "../Components/UpdateMeal";
 import UpcomingMealsForAdmin from "../Pages/DashboardPages/upconingMeal/UpcomingMealsForAdmin";
 import Comment from "../Pages/comment/Comment";
 import QuizPage from "../Pages/QuizPage/QuizPage";
+import TreeShirt from "../Pages/Tree-Shirt/TreeShirt";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/meals",
         element: <Meals />,
+      },
+      {
+        path: "/Tree-shirts",
+        element: <TreeShirt />,
       },
       {
         path: "/upcomingMeals",

@@ -29,7 +29,31 @@ const Navbar = () => {
               : "text-info hover:underline"
           }
         >
-          Meals
+      All  Cloth
+        </NavLink>
+      </li>
+      <li className="px-1">
+        <NavLink
+          to="/Tree-shirts"
+          className={({ isActive }) =>
+            isActive
+              ? "btn btn-sm btn-info text-white"
+              : "text-info hover:underline"
+          }
+        >
+      Tree shirt 
+        </NavLink>
+      </li>
+      <li className="px-1">
+        <NavLink
+          to="/meals"
+          className={({ isActive }) =>
+            isActive
+              ? "btn btn-sm btn-info text-white"
+              : "text-info hover:underline"
+          }
+        >
+      Borkha
         </NavLink>
       </li>
       <li className="px-1">
@@ -45,7 +69,7 @@ const Navbar = () => {
         </NavLink>
       </li>
       {/* Comment Nav */}
-      {user && (
+      {/* {user && (
         <>
           <li className="px-1">
             <NavLink
@@ -73,8 +97,8 @@ const Navbar = () => {
             </NavLink>
           </li>
         </>
-      )}
-      <li className="px-1 relative">
+      )} */}
+      {/* <li className="px-1 relative">
         <div>
           <button className="btn btn-sm btn-ghost text-info relative">
             <IoMdNotificationsOutline className="text-2xl" />
@@ -83,7 +107,7 @@ const Navbar = () => {
             </span>
           </button>
         </div>
-      </li>
+      </li> */}
     </>
   );
 

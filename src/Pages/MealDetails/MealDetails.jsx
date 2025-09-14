@@ -66,11 +66,11 @@ const MealDetails = () => {
   // if(user.email === user)
 
   return (
-    <div className="max-w-4xl mx-auto my-4 p-6 bg-base-200 rounded-lg">
-      <img
-        src={meal.image}
-        className="w-full h-64 object-cover rounded-lg mb-4"
-      />
+    <div className="max-w-4xl mx-auto px-4 mt-3 bg-base-200 rounded-lg">
+     <img
+  src={meal.image}
+  className="w-full object-cover p-0 rounded-lg mb-4 lg:w-xl h-100  mx-auto"
+/>
       <h2 className="text-3xl font-bold mb-2">{meal.title}</h2>
       <p className="text-sm text-gray-500 mb-2">By: {meal.distributor_name}</p>
       <p className="text-gray-700 mb-4">{meal.description}</p>

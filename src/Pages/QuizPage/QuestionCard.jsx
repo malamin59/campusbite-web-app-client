@@ -3,7 +3,7 @@ import { FaCheckCircle, FaLightbulb, FaTrophy, FaBookOpen } from "react-icons/fa
 
 const QuestionCard = ({ question, current, total, onAnswer, onPrevious }) => {
   return (
-    <div className="p-6 mt-4 max-w-xl mx-auto border rounded-xl shadow-md bg-white">
+    <div className="p-6 mt-4 max-w-xl lg:mx-auto mx-6  shadow-md bg-white">
       {/* 🔥 Marquee Section */}
       <Marquee
         gradient={false}

@@ -10,11 +10,28 @@ const AddMeal = () => {
   const {
     register,
     handleSubmit,
+    setValue, // ✅ Added for image field update
+    trigger, // ✅ Added for validation trigger
     reset,
     formState: { errors },
   } = useForm();
+
   const [uploading, setUploading] = useState(false);
+  const [preview, setPreview] = useState(null); // ✅ Image preview state
   const fileInputRef = useRef();
+
+  // ✅ Handle image selection and preview + react-hook-form
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setPreview(URL.createObjectURL(file));
+      setValue("image", e.target.files); // Update form value
+      trigger("image"); // Re-validate field
+    } else {
+      setPreview(null);
+      setValue("image", null);
+    }
+  };
 
   const onSubmit = async (data) => {
     setUploading(true);
@@ -25,6 +42,7 @@ const AddMeal = () => {
         return;
       }
 
+      // Upload image to imgbb
       const imageUrl = await imageUpload(imageFile);
 
       const mealData = {
@@ -40,20 +58,22 @@ const AddMeal = () => {
         rating: 0,
         likes: 0,
         reviews_count: 0,
-        option: data.option
+        option: data.option,
       };
 
+      // Send to backend
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/meals`,
         mealData
       );
 
       if (res.data.insertedId) {
-        Swal.fire("Success", "Meal added successfully!", "success");
+        Swal.fire("Success", "Cloth added successfully!", "success");
         // reset();
         if (fileInputRef.current) fileInputRef.current.value = "";
+        setPreview(null); // Clear preview
       } else {
-        Swal.fire("Error", "Failed to add meal", "error");
+        Swal.fire("Error", "Failed to add cloth", "error");
       }
     } catch (error) {
       console.error(error);
@@ -64,8 +84,8 @@ const AddMeal = () => {
   };
 
   return (
-    <div className=" max-w-3xl w-full  m bg-base-200 p-4 rounded-lg shadow-md overflow-y-auto max-h-[90vh]">
-      <h2 className="text-2xl font-bold mb-6 text-center">Add Meal</h2>
+    <div className="max-w-3xl w-full m bg-base-200 p-4 rounded-lg shadow-md overflow-y-auto max-h-[90vh]">
+      <h2 className="text-2xl font-bold mb-6 text-center">Add Cloth</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="grid grid-cols-1 md:grid-cols-2 gap-4"
@@ -94,12 +114,14 @@ const AddMeal = () => {
           <select
             id="category"
             {...register("category", { required: "Category is required" })}
-            className="select bg- select-bordered w-full"
+            className="select select-bordered w-full"
           >
             <option value="">Select category</option>
-            <option value="Breakfast">Breakfast</option>
-            <option value="Lunch">Lunch</option>
-            <option value="Dinner">Dinner</option>
+            <option value="Borkha">Borkha</option>
+            <option value="Three Piece">Three Piece</option>
+            <option value="T-shirt">T-shirt</option>
+            <option value="Shirt">Shirt</option>
+            <option value="Pant">Pant</option>
           </select>
           {errors.category && (
             <p className="text-red-500 text-sm">{errors.category.message}</p>
@@ -109,31 +131,43 @@ const AddMeal = () => {
         {/* Image */}
         <div className="md:col-span-2">
           <label className="label" htmlFor="image">
-            Meal Image
+            cloth Image
           </label>
           <input
             id="image"
-            ref={fileInputRef}
             type="file"
             accept="image/*"
             {...register("image", { required: "Image is required" })}
+            ref={fileInputRef}
+            onChange={handleImageChange} // ✅ preview handler
             className="file-input file-input-bordered w-full"
           />
           {errors.image && (
             <p className="text-red-500 text-sm">{errors.image.message}</p>
+          )}
+
+          {/* ✅ Image preview */}
+          {preview && (
+            <div className="mt-2">
+              <img
+                src={preview}
+                alt="Preview"
+                className="w-32 h-32 object-cover rounded-md border"
+              />
+            </div>
           )}
         </div>
 
         {/* Ingredients */}
         <div className="md:col-span-2">
           <label className="label" htmlFor="ingredients">
-            Ingredients
+            brand
           </label>
           <textarea
             id="ingredients"
             {...register("ingredients", { required: "Ingredients required" })}
             className="textarea textarea-bordered w-full"
-            placeholder="List ingredients separated by commas"
+            placeholder="write the Product brand"
             rows={2}
           />
           {errors.ingredients && (
@@ -179,15 +213,15 @@ const AddMeal = () => {
           )}
         </div>
 
-        {/* meal option */}
+        {/* Option */}
         <div>
           <label className="label" htmlFor="option">
-            option
+            Option
           </label>
           <select
             id="option"
-            {...register("option", { required: "option is required" })}
-            className="select bg- select-bordered w-full"
+            {...register("option", { required: "Option is required" })}
+            className="select select-bordered w-full"
           >
             <option value="">Select option</option>
             <option value="publish">Publish</option>
@@ -219,6 +253,7 @@ const AddMeal = () => {
             className="input input-bordered w-full bg-gray-100"
           />
         </div>
+
         {/* Submit Button */}
         <div className="md:col-span-2">
           <button
@@ -226,7 +261,7 @@ const AddMeal = () => {
             className={`btn btn-info w-full ${uploading ? "loading" : ""}`}
             disabled={uploading}
           >
-            {uploading ? "Uploading..." : "Add Meal"}
+            {uploading ? "Uploading..." : "Add Cloth"}
           </button>
         </div>
       </form>
