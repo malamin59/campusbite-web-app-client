@@ -118,7 +118,7 @@ const AddMeal = () => {
           >
             <option value="">Select category</option>
             <option value="Borkha">Borkha</option>
-            <option value="Three Piece">Three Piece</option>
+            <option value="Three-Piece">Three Piece</option>
             <option value="T-shirt">T-shirt</option>
             <option value="Shirt">Shirt</option>
             <option value="Pant">Pant</option>

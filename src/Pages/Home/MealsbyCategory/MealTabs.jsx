@@ -16,7 +16,7 @@ const MealTabs = () => {
     fetchMeals();
   }, [activeTab]);
 
-  const tabs = ["All", "Breakfast", "Lunch", "Dinner"];
+  const tabs = ["All", "Three-Piece", "Shirt", "Pant"];
   if (meals.length === 0) {
     return <EmptyPage />;
   }

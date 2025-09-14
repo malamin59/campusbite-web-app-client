@@ -32,6 +32,7 @@ const Navbar = () => {
       All  Cloth
         </NavLink>
       </li>
+      
       <li className="px-1">
         <NavLink
           to="/Tree-shirts"
@@ -46,7 +47,31 @@ const Navbar = () => {
       </li>
       <li className="px-1">
         <NavLink
-          to="/meals"
+          to="/pants"
+          className={({ isActive }) =>
+            isActive
+              ? "btn btn-sm btn-info text-white"
+              : "text-info hover:underline"
+          }
+        >
+      pants
+        </NavLink>
+      </li>
+      <li className="px-1">
+        <NavLink
+          to="/Three-Piece"
+          className={({ isActive }) =>
+            isActive
+              ? "btn btn-sm btn-info text-white"
+              : "text-info hover:underline"
+          }
+        >
+      Three Piece
+        </NavLink>
+      </li>
+      <li className="px-1">
+        <NavLink
+          to="/Borkha"
           className={({ isActive }) =>
             isActive
               ? "btn btn-sm btn-info text-white"
@@ -65,9 +90,11 @@ const Navbar = () => {
               : "text-info hover:underline"
           }
         >
-          Upcoming Meals
+          Upcoming Clots
         </NavLink>
       </li>
+
+
       {/* Comment Nav */}
       {/* {user && (
         <>

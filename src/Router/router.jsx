@@ -30,6 +30,11 @@ import UpcomingMealsForAdmin from "../Pages/DashboardPages/upconingMeal/Upcoming
 import Comment from "../Pages/comment/Comment";
 import QuizPage from "../Pages/QuizPage/QuizPage";
 import TreeShirt from "../Pages/Tree-Shirt/TreeShirt";
+import Borkha from "../Pages/Borkha/Borkha";
+import Pants from "../Pages/Pants/Pants";
+import ThreePiece from "../Pages/ThreePiece/ThreePiece.JSX";
+
+
 
 const router = createBrowserRouter([
   {
@@ -49,6 +54,18 @@ const router = createBrowserRouter([
       {
         path: "/Tree-shirts",
         element: <TreeShirt />,
+      },
+      {
+        path: "/Borkha",
+        element: <Borkha />,
+      },
+      {
+        path: "/pants",
+        element: <Pants />,
+      },
+      {
+        path: "/Three-Piece",
+        element: <ThreePiece />,
       },
       {
         path: "/upcomingMeals",

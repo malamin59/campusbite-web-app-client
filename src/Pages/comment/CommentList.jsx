@@ -41,12 +41,6 @@ const CommentList = () => {
         <p className="text-3xl md:text-3xl lg:text-4xl italic font-bold">
           Our users say
         </p>
-        <Link
-          className="mt-2 text-xl text-end hover:underline"
-          to="/comment"
-        >
-          write your comment
-        </Link>
       </div>
 
       {/* Auto Scrolling List */}
@@ -93,6 +87,11 @@ const CommentList = () => {
             </div>
           ))}
         </motion.div>
+      </div>
+      <div className="grid justify-end">
+        <Link className=" mr-4 text-xl text-end hover:underline" to="/comment">
+          write your comment
+        </Link>
       </div>
     </div>
   );

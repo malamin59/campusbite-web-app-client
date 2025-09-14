@@ -1,46 +1,48 @@
-import { FaRocket, FaUtensils, FaUserGraduate, FaFire, FaSmile, FaCoins } from "react-icons/fa";
+import { FaTshirt, FaShippingFast, FaTags, FaSmileBeam, FaGem, FaSyncAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const SpecialFeatures = () => {
   const features = [
     {
-      icon: <FaRocket className="text-4xl text-blue-600" />,
-      title: "Lightning Fast Delivery",
-      description: "We ensure your meals are delivered fresh, hot, and always on time.",
+      icon: <FaTshirt className="text-4xl text-pink-500" />,
+      title: "Trendy Collections",
+      description: "Discover the latest fashion trends, updated every season to keep you stylish.",
     },
     {
-      icon: <FaUtensils className="text-4xl text-green-500" />,
-      title: "Handpicked Menus",
-      description: "Our meals are curated with student tastes and health in mind.",
+      icon: <FaGem className="text-4xl text-purple-500" />,
+      title: "Premium Quality",
+      description: "We use only the finest fabrics and materials for comfort and durability.",
     },
     {
-      icon: <FaUserGraduate className="text-4xl text-purple-600" />,
-      title: "Student-First Platform",
-      description: "Built by students, for students. Your needs come first — always.",
+      icon: <FaShippingFast className="text-4xl text-green-500" />,
+      title: "Fast & Free Delivery",
+      description: "Get your orders quickly with our fast, reliable, and free delivery service.",
     },
     {
-      icon: <FaFire className="text-4xl text-red-500" />,
-      title: "Hot Deals Daily",
-      description: "Enjoy daily discounts and offers only available to campus users.",
+      icon: <FaTags className="text-4xl text-blue-500" />,
+      title: "Exclusive Discounts",
+      description: "Enjoy seasonal sales, special deals, and members-only offers.",
     },
     {
-      icon: <FaSmile className="text-4xl text-yellow-500" />,
-      title: "Loved by Students",
-      description: "Thousands of positive reviews from students across the country.",
+      icon: <FaSmileBeam className="text-4xl text-yellow-500" />,
+      title: "Customer Happiness",
+      description: "Thousands of happy customers trust us for their fashion needs.",
     },
     {
-      icon: <FaCoins className="text-4xl text-amber-600" />,
-      title: "Affordable Pricing",
-      description: "High quality doesn’t have to be high priced — especially for students.",
+      icon: <FaSyncAlt className="text-4xl text-red-500" />,
+      title: "Easy Returns",
+      description: "Not satisfied? Return your items easily with our hassle-free policy.",
     },
   ];
 
   return (
-    <section className="bg-white py-20 lg:px-0 px-6">
+    <section className="bg-gradient-to-br from-pink-50 via-white to-blue-50 py-20 lg:px-0 px-6">
       <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold text-info mb-3">What Makes CampusBite Special?</h2>
+        <h2 className="text-4xl font-bold text-gray-800 mb-3">
+          Why Choose <span className="text-pink-600">StyleHub</span>?
+        </h2>
         <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-          We go beyond food — we create an experience that supports your student journey.
+          Shopping for clothes should be easy, fun, and rewarding — here’s why our store stands out.
         </p>
       </div>
 
@@ -48,7 +50,7 @@ const SpecialFeatures = () => {
         {features.map((feature, index) => (
           <motion.div
             key={index}
-            className="flex items-start gap-5"
+            className="flex items-start gap-5 p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}

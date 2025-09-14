@@ -9,7 +9,9 @@ const limit = 6;
 
 const fetchShirts = async ({ pageParam = 1 }) => {
   const res = await axios.get(
-    `${import.meta.env.VITE_API_URL}/shirts?page=${pageParam}&limit=${limit}`
+    `${
+      import.meta.env.VITE_API_URL
+    }/Three-Piece?page=${pageParam}&limit=${limit}`
   );
   return {
     data: res.data,
@@ -17,10 +19,10 @@ const fetchShirts = async ({ pageParam = 1 }) => {
   };
 };
 
-const TreeShirt = () => {
+const ThreePiece = () => {
   const { data, fetchNextPage, hasNextPage, isLoading, isError } =
     useInfiniteQuery({
-      queryKey: ["shirts"],
+      queryKey: ["ThreePiece"],
       queryFn: fetchShirts,
       getNextPageParam: (lastPage) => lastPage.nextPage || undefined,
     });
@@ -34,7 +36,8 @@ const TreeShirt = () => {
   return (
     <div className="px-4  max-w-7xl mx-auto">
       <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
-        Shirt Collection
+        {" "}
+        Three Piece Collection
       </h2>
 
       <InfiniteScroll
@@ -48,7 +51,7 @@ const TreeShirt = () => {
         }
         endMessage={
           <p className="text-center mt-4 text-gray-500">
-            No more shirts to display
+            No more  shirts to display
           </p>
         }
       >
@@ -58,14 +61,13 @@ const TreeShirt = () => {
               key={shirt._id}
               className="bg-white rounded-xl shadow-md hover:shadow-xl transition transform hover:scale-105 overflow-hidden flex flex-col"
             >
-              <div className="relative w-7/12 mx-auto">
+                       <div className="relative w-10/12 mx-auto">
   <img
     src={shirt.image}
     alt={shirt.title}
     className="w-full h-52 object-cover rounded-lg"
   />
 </div>
-
 
               <div className="p-4 flex flex-col flex-grow">
                 <h3 className="text-lg font-semibold text-gray-800">
@@ -94,4 +96,4 @@ const TreeShirt = () => {
   );
 };
 
-export default TreeShirt;
+export default ThreePiece;

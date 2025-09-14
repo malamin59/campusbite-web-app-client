@@ -125,7 +125,7 @@ const Meals = () => {
           loader={<h4 className="text-center py-4">Loading more meals...</h4>}
           endMessage={
             <p className="text-center text-sm text-gray-400 py-4">
-              You've seen all meals.
+              You've seen all Cloth.
             </p>
           }
         >

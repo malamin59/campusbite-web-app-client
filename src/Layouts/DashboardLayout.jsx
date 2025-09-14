@@ -131,7 +131,7 @@ const DashboardLayout = () => {
             }
             onClick={() => setSidebarOpen(false)}
           >
-            <FaUtensils /> Add Meals
+            <FaUtensils /> Add clots
           </NavLink>
           <NavLink
             to="/dashboard/users"
@@ -154,7 +154,7 @@ const DashboardLayout = () => {
             }
             onClick={() => setSidebarOpen(false)}
           >
-            <FaCalendarAlt /> Upcoming Meals
+            <FaCalendarAlt /> Upcoming Clots
           </NavLink>
 
           <NavLink
@@ -166,7 +166,7 @@ const DashboardLayout = () => {
             }
             onClick={() => setSidebarOpen(false)}
           >
-            <FaConciergeBell /> Serve Meals
+            <FaConciergeBell /> Serve clots
           </NavLink>
 
           <NavLink
@@ -190,7 +190,7 @@ const DashboardLayout = () => {
             }
             onClick={() => setSidebarOpen(false)}
           >
-            <FaClipboardList /> All Meals
+            <FaClipboardList /> All Clots
           </NavLink>
         </>
       )}
