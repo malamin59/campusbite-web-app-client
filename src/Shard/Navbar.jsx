@@ -54,7 +54,7 @@ const Navbar = () => {
               : "text-info hover:underline"
           }
         >
-      pants
+      Pants
         </NavLink>
       </li>
       <li className="px-1">

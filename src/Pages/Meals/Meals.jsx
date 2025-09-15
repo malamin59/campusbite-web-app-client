@@ -131,30 +131,38 @@ const Meals = () => {
         >
           <div className="grid lg:grid-cols-4 lg:pt-2 md:grid-cols-3 gap-6">
             {meals.map((meal) => (
-              <div key={meal._id} className="card bg-base-100 shadow-lg">
-                <figure>
-                  <img
-                    src={meal.image}
-                    alt={meal.title}
-                    className="h-48 w-full object-cover"
-                  />
-                </figure>
-                <div className="card-body">
-                  <h2 className="card-title">{meal.title}</h2>
-                  <p className="text-sm text-gray-500">{meal.category}</p>
-                  <p>৳ {meal.price}</p>
-                  <p className="text-xs text-gray-400">
-                    {meal.ingredients.join(", ")}
-                  </p>
-                  <Link
-                    to={`/meal/${meal._id}`}
-                    className="btn w-18 btn-outline btn-sm"
-                  >
-                    Details
-                  </Link>
-                </div>
-              </div>
-            ))}
+  <div key={meal._id} className="card bg-base-100 shadow-sm">
+    <figure className="aspect-[4/3] w-full overflow-hidden">
+      <img
+        src={meal.image}
+        alt={meal.title}
+        className="w-full h-full object-cover rounded-lg"
+      />
+    </figure>
+    <div className="card-body">
+      <h2 className="card-title">
+        {meal.title}
+      </h2>
+
+      <p className="text-gray-600 text-sm line-clamp-2">
+        {meal.description || meal.category || "No description"}
+      </p>
+
+      {/* Footer */}
+      <div className="card-actions justify-between items-center mt-2">
+        <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-md text-sm font-semibold">
+          {meal?.price} TK
+        </span>
+        <Link
+          to={`/meal/${meal._id}`}
+          className="btn btn-sm btn-info normal-case"
+        >
+          Details
+        </Link>
+      </div>
+    </div>
+  </div>
+))}
           </div>
         </InfiniteScroll>
       )}
