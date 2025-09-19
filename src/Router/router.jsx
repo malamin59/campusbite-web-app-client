@@ -15,7 +15,7 @@ import AllMeals from "../Pages/DashboardPages/AllMeals/AllMeals";
 import UpcomingMeals from "../Pages/DashboardPages/UpcomingMeals/UpcomingMeals";
 import RequestedMeal from "../Pages/DashboardPages/UserDashboard/RequestedMeal";
 import MyReviews from "../Pages/DashboardPages/UserDashboard/MyReviews";
-import PaymentHistory from "../Pages/DashboardPages/UserDashboard/PaymentHistory";
+// import PaymentHistory from "../Pages/DashboardPages/UserDashboard/PaymentHistory";
 import PrivateRoute from "./PrivateRout";
 import AdminRouts from "./AdminRout";
 import AdminProfile from "../Pages/DashboardPages/AdminProfile/AdminProfile";
@@ -33,6 +33,7 @@ import TreeShirt from "../Pages/Tree-Shirt/TreeShirt";
 import Borkha from "../Pages/Borkha/Borkha";
 import Pants from "../Pages/Pants/Pants";
 import ThreePiece from "../Pages/ThreePiece/ThreePiece.JSX";
+import Bookmark from "../Pages/DashboardPages/UserDashboard/Bookmark";
 
 
 
@@ -215,14 +216,23 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "payment-history",
+        path: "bookMark",
         element: (
           <UserRout>
             {" "}
-            <PaymentHistory />
+            <Bookmark />
           </UserRout>
         ),
       },
+      // {
+      //   path: "payment-history",
+      //   element: (
+      //     <UserRout>
+      //       {" "}
+      //       <PaymentHistory />
+      //     </UserRout>
+      //   ),
+      // },
       
       {
         path: "/dashboard/updateReview/:id",

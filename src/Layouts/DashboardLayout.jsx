@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Outlet, NavLink } from "react-router";
-import { FaHome, FaUser, FaUtensils, FaUsers } from "react-icons/fa";
+import { FaHome, FaUser, FaUtensils, FaUsers, FaBookmark } from "react-icons/fa";
 import NavbarIcon from "../Shard/Navbaricon";
 import useRole from "../Hooks/UseRole";
 import LoadingSpinner from "../Shard/LoadingSpinner/LoadingSpinner";
@@ -58,7 +58,6 @@ const DashboardLayout = () => {
     <>
       {role === "user" && (
         <>
-
           <NavLink
             to="/dashboard/userProfile"
             className={({ isActive }) =>
@@ -80,7 +79,7 @@ const DashboardLayout = () => {
             }
             onClick={() => setSidebarOpen(false)}
           >
-            <FaUtensils /> Requested Meals
+            <FaUtensils /> Requested Cloth
           </NavLink>
 
           <NavLink
@@ -95,7 +94,7 @@ const DashboardLayout = () => {
             <FaCommentAlt /> My Reviews
           </NavLink>
 
-          <NavLink
+          {/* <NavLink
             to="/dashboard/payment-history"
             className={({ isActive }) =>
               isActive
@@ -105,6 +104,18 @@ const DashboardLayout = () => {
             onClick={() => setSidebarOpen(false)}
           >
             <FaMoneyCheckAlt /> Payment History
+          </NavLink> */}
+
+          <NavLink
+            to="/dashboard/bookMark"
+            className={({ isActive }) =>
+              isActive
+                ? "btn btn-sm btn-info text-white"
+                : "btn btn-sm btn-outline"
+            }
+            onClick={() => setSidebarOpen(false)}
+          >
+            <FaBookmark /> BookMark History
           </NavLink>
         </>
       )}
@@ -194,7 +205,7 @@ const DashboardLayout = () => {
           </NavLink>
         </>
       )}
-{/* logout  */}
+      {/* logout  */}
       <div className="mt-[100%] ">
         <button
           onClick={handleLogout}

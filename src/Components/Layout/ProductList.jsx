@@ -4,6 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router";
 import LoadingSpinner from "../../Shard/LoadingSpinner/LoadingSpinner";
 import Error from "../../Shard/Error";
+import 'animate.css';
 
 const limit = 6;
 
@@ -35,10 +36,11 @@ const ProductList = ({ title, queryKey, endpoint }) => {
   const products = data.pages.flatMap((page) => page.data);
 
   return (
-    <div className="px-4 max-w-7xl mx-auto">
-      <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
+    <div className="px-4 mt-2 max-w-7xl mx-auto">
+      <h2 className="text-3xl font-bold animate__animated animate__backInDown  py-2 lg:mb-4 text-center text-gray-700">
         {title}
       </h2>
+      
 
       <InfiniteScroll
         dataLength={products.length}
@@ -53,29 +55,29 @@ const ProductList = ({ title, queryKey, endpoint }) => {
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.map((item) => (
-            <div className="card bg-base-100  shadow-sm">
-              <figure className="aspect-[4/3] w-full overflow-hidden">
+            <div className="card bg-base-100  shadow-xl ">
+              <figure className="px-8 pt-8">
                 <img
-                  src={item?.image}
-                  alt={item?.title || "Cloth image"}
-                  className="w-full h-full object-cover rounded-lg"
+                  src={item.image} 
+                  alt="Product-image"
+                  className="rounded-lg  h-54"
                 />
               </figure>
-              <div className="card-body">
-                <h2 className="card-title">{item?.title} </h2>
-
-                <p className="text-gray-600 text-sm line-clamp-2">
+              <div className="card-body shadow-lg hover:shadow-xl">
+                <h2 className="card-title text-lg font-semibold text-gray-800">
+                  {item.title}
+                </h2>
+                <p className="text-gray-600 text-sm  line-clamp-2 flex-grow">
                   {item.description}
                 </p>
-
-                {/* Footer */}
+               {/* Footer */}
                 <div className="card-actions justify-between items-center mt-2">
                   <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-md text-sm font-semibold">
                     {item?.price} TK
                   </span>
                   <Link
                     to={`/meal/${item._id}`}
-                    className="btn btn-sm btn-info normal-case"
+                    className="btn btn-sm btn-info normal-case hover:scale-105 transition-transform"
                   >
                     Details
                   </Link>

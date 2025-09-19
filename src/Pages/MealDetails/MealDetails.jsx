@@ -5,7 +5,8 @@ import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import ReviewSection from "../../Components/ReviewSection";
 import toast from "react-hot-toast";
-import { FaThumbsUp, FaUtensils } from "react-icons/fa";
+import { FaBookmark, FaThumbsUp, FaUtensils } from "react-icons/fa";
+import axios from "axios";
 
 const MealDetails = () => {
   const { id } = useParams();
@@ -43,13 +44,14 @@ const MealDetails = () => {
   };
 
   const handleRequestMeal = async () => {
-    if (user.email === meal?.distributor_email) return toast.error("you can't request your meal")
+    if (user.email === meal?.distributor_email)
+      return toast.error("you can't request your meal");
     if (!user) return Swal.fire("Login Required", "Please login", "warning");
-    if (userData?.badge === "Bronze") {
-      return toast.error(
-        "Only Silver, Gold, or Platinum users can request meals."
-      );
-    }
+    // if (userData?.badge === "Bronze") {
+    //   return toast.error(
+    //     "Only Silver, Gold, or Platinum users can request meals."
+    //   );
+    // }
 
     await axiosSecure.post("/meal-requests", {
       mealId: id,
@@ -63,14 +65,43 @@ const MealDetails = () => {
 
     Swal.fire("Requested!", "Your meal request is pending", "success");
   };
+
+  const payload = {
+    name: user.name,
+    email: user.email,
+    title:meal.title,
+    price:meal.price
+  };
+
+  const handleBookmark = async () => {
+    if (!user) {
+      return Swal.fire("Login Required", "Please login", "warning");
+    }
+
+    if (user.email === meal?.distributor_email) {
+      return toast.error("You can't request your own meal");
+    }
+
+    try {
+      const bookmark = await axios.post(
+        `${import.meta.env.VITE_API_URL}/bookMarks`,
+        payload
+      );
+      toast.success("Cloth bookmarked successfully!");
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong. Please try again.");
+    }
+  };
+
   // if(user.email === user)
 
   return (
     <div className="max-w-4xl mx-auto px-4 mt-3 bg-base-200 rounded-lg">
-     <img
-  src={meal.image}
-  className="w-full object-cover p-0 rounded-lg mb-4 lg:w-xl h-100  mx-auto"
-/>
+      <img
+        src={meal.image}
+        className="w-full object-cover p-0 rounded-lg mb-4 lg:w-xl h-100  mx-auto"
+      />
       <h2 className="text-3xl font-bold mb-2">{meal.title}</h2>
       <p className="text-sm text-gray-500 mb-2">By: {meal.distributor_name}</p>
       <p className="text-gray-700 mb-4">{meal.description}</p>
@@ -105,8 +136,14 @@ const MealDetails = () => {
         </button>
       </div>
 
+      <button
+    className="btn btn-outline mt-3 btn-info flex items-center gap-2 hover:scale-105 transition-transform"
+    onClick={handleBookmark} >
+    <FaBookmark  /> Bookmark
+  </button>
+
       {/* Reviews Section */}
-      <div className="mt-10">
+      <div className="mt-6">
         <h3 className="text-xl font-semibold mb-2">
           Reviews ({meal.reviews_count})
         </h3>
