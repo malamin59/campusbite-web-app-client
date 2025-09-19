@@ -47,11 +47,11 @@ const MealDetails = () => {
     if (user.email === meal?.distributor_email)
       return toast.error("you can't request your meal");
     if (!user) return Swal.fire("Login Required", "Please login", "warning");
-    // if (userData?.badge === "Bronze") {
-    //   return toast.error(
-    //     "Only Silver, Gold, or Platinum users can request meals."
-    //   );
-    // }
+    if (userData?.badge === "Bronze") {
+      return toast.error(
+        "Only Silver, Gold, or Platinum users can request meals."
+      );
+    }
 
     await axiosSecure.post("/meal-requests", {
       mealId: id,

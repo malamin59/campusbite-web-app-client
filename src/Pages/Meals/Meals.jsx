@@ -82,9 +82,11 @@ const Meals = () => {
             onChange={(e) => setCategory(e.target.value)}
           >
             <option value="All">All Categories</option>
-            <option value="Breakfast">T-shirt</option>
-            <option value="Lunch">Lunch</option>
-            <option value="Dinner">Dinner</option>
+            <option value="Shirt">Shirt</option>
+            <option value="Pant">Pant</option>
+            <option value="Borkha ">T-shirt</option>
+            <option value="T-shirt">T-shirt</option>
+            <option value="Three-Piece">Three-Piece</option>
           </select>
 
           <input
@@ -115,11 +117,11 @@ const Meals = () => {
           next={() => fetchMeals()}
           hasMore={hasMore}
           loader={
-            <h4 className="text-center py-4 text-gray-500">আরো meals লোড হচ্ছে...</h4>
+            <h4 className="text-center py-4 text-gray-500">more Cloths loading...</h4>
           }
           endMessage={
             <p className="text-center text-sm text-gray-400 py-4">
-              সব meals দেখা হয়ে গেছে।
+              you well see the all cloth's
             </p>
           }
         >

@@ -12,7 +12,7 @@ const LoadingSpinner = ({ message = "Please wait...", color = "#0ea5e9" }) => {
       </p>
 
       {/* Optional: Subtext */}
-      <p className="text-sm mt-2 text-gray-400">CampusBite is loading...</p>
+      <p className="text-sm mt-2 text-gray-400">Products is loading...</p>
     </div>
   );
 };

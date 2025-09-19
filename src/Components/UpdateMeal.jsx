@@ -33,6 +33,7 @@ const UpdateMeal = () => {
     });
   }, [id, reset]);
 
+
   const onSubmit = async (data) => {
     setUploading(true);
     try {
@@ -61,7 +62,7 @@ const UpdateMeal = () => {
       );
 
       if (res.data.modifiedCount > 0) {
-        Swal.fire("Success", "Meal updated successfully!", "success");
+        Swal.fire("Success", "Cloth updated successfully!", "success");
       } else {
         Swal.fire("Note", "No changes were made.", "info");
       }
@@ -75,7 +76,7 @@ const UpdateMeal = () => {
 
   return (
     <div className="max-w-3xl w-full mx-auto bg-base-200 p-4 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-6 text-center">Update Meal</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center">Update Cloth</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="grid grid-cols-1 md:grid-cols-2 gap-4"
@@ -106,9 +107,11 @@ const UpdateMeal = () => {
             className="select select-bordered w-full"
           >
             <option value="">Select category</option>
-            <option value="Breakfast">Breakfast</option>
-            <option value="Lunch">Lunch</option>
-            <option value="Dinner">Dinner</option>
+            <option value="Shirt">Shirt</option>
+            <option value="Pant">Pant</option>
+            <option value="Borkha">Borkha</option>
+            <option value="T-shirt">T-shirt</option>
+            <option value="Three-Piece">Three-Piece</option>
           </select>
         </div>
 
@@ -176,7 +179,7 @@ const UpdateMeal = () => {
             className={`btn btn-info w-full ${uploading ? "loading" : ""}`}
             disabled={uploading}
           >
-            {uploading ? "Updating..." : "Update Meal"}
+            {uploading ? "Updating..." : "Update Cloth"}
           </button>
         </div>
       </form>

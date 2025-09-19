@@ -19,7 +19,9 @@ const CheckoutPage = () => {
   }
 
   return (
-    <div className="max-w-xl mx-auto mt-10 p-4 bg-base-200 rounded-xl shadow-md">
+    <div className="max-w-xl lg:mx-auto mx-6 md:mx-auto md:mt-22 mt-10 p-4  
+     bg-gradient-to-r from-blue-900 via-purple-900 to-pink-900
+    rounded-xl shadow-md">
       <h2 className="text-2xl font-bold mb-6 text-center">
         Checkout for <span className="text-primary">{badge.name}</span> Badge
       </h2>

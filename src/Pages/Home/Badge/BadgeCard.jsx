@@ -16,7 +16,10 @@ const BadgeCard = ({ badge }) => {
   return (
     <motion.div
       whileHover={{ scale: 1.03 }}
-      className="rounded-xl p-6 shadow-lg transition-all duration-300 bg-base-200 text-gray-800"
+      className="rounded-xl p-6 shadow-lg transition-all duration-30 text-gray-800  bg-gradient-to-r from-blue-900 via-purple-900 to-pink-900
+
+      
+    "
     >
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
